@@ -13,6 +13,7 @@ defmodule TimeManagerWeb.Router do
   scope "/api", TimeManagerWeb do
     pipe_through :api
     post "/users/sign_in", UserController, :sign_in
+    post "/users/find_user_with_email", UserController, :find_user_with_email
   end
 
 	scope "/api", TimeManagerWeb do

@@ -3,6 +3,7 @@ defmodule TimeManagerWeb.UserController do
 
   alias TimeManager.Account
   alias TimeManager.Account.User
+  alias TimeManager.Repo
 
   action_fallback TimeManagerWeb.FallbackController
 
@@ -31,6 +32,12 @@ defmodule TimeManagerWeb.UserController do
     with {:ok, %User{} = user} <- Account.update_user(user, user_params) do
       render(conn, "show.json", user: user)
     end
+  end
+
+  def find_user_with_email(conn, %{"email" => email}) do
+    query = Repo.get_by(User, email: email)
+    IO.inspect query
+    render(conn, "show.json", user: query);
   end
 
   def delete(conn, %{"id" => id}) do
