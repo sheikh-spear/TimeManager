@@ -11,7 +11,7 @@
       </b-nav-item-dropdown>
     </b-navbar-nav>
     <b-navbar-nav class="ml-auto">
-        <b-nav-item href="#">My Account</b-nav-item>
+        <b-nav-item href="#">My Account<i class="fas fa-user-circle"></i></b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </div>

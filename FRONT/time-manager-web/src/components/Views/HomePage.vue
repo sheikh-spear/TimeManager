@@ -2,20 +2,22 @@
   <div id="Home">
     <Navbar />
     <div class="container">
-      <UserList/>
+      <TeamList/>
     </div>
   </div>
 </template>
 
+
 <script>
+
 import Navbar from "./Navbar";
-import UserList from "../User/UserList"
+import TeamList from "../User/TeamList"
 
 export default {
   name: "HomePage",
   components: {
     Navbar,
-    UserList
+    TeamList
   },
 };
 </script>

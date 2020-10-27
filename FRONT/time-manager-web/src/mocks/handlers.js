@@ -30,46 +30,98 @@ export const handlers = [
     }),
     // Handles a GET /user request
     rest.get('/api/users/list', (req, res, ctx) => {
-        // Persist user's authentication in the session
         return res(
-            // Respond with a 200 status code
             ctx.status(200),
             ctx.json({
                 "data": {
-                    "users" :
+                    "users":
+                        [
+                            {
+                                email: "test@mail.com",
+                                is_manager: true,
+                                is_general_manager: true,
+                                id: '057231ee-91a9-404f-97ea-0f1a344de529'
+                            },
+                            {
+                                email: "test@mail.com",
+                                is_manager: false,
+                                is_general_manager: false,
+                                id: '057231ee-91a9-404f-97ea-0f1a344de526'
+                            },
+                            {
+                                email: "test@mail.com",
+                                is_manager: true,
+                                is_general_manager: false,
+                                id: '057231ee-91a9-404f-97ea-0f1a344de527'
+                            },
+                            {
+                                email: "test@mail.com",
+                                is_manager: false,
+                                is_general_manager: false,
+                                id: '057231ee-91a9-404f-97ea-0f1a344de520'
+                            },
+                            {
+                                email: "test@mail.com",
+                                is_manager: true,
+                                is_general_manager: false,
+                                id: '057231ee-91a9-404f-97ea-0f1a344de528'
+                            }
+                        ]
+                }
+            })
+        )
+    }),
+    rest.get('/api/teams/list', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                "teams":
                     [
                         {
-                          email: "test@mail.com",
-                          is_manager: true,
-                          is_general_manager: true,
-                          id: '057231ee-91a9-404f-97ea-0f1a344de529'
+                            "id": "45678",
+                            "name": "first",
+                            "users":
+                                [
+                                    {
+                                        email: "test@mail.com",
+                                        is_manager: true,
+                                        is_general_manager: false,
+                                        id: '057231ee-91a9-404f-97ea-0f1a344de528'
+                                    },
+                                    {
+                                        email: "test@mail.com",
+                                        is_manager: false,
+                                        is_general_manager: false,
+                                        id: '057231ee-91a9-404f-97ea-0f1a344de526'
+                                    },
+                                ]
                         },
                         {
-                          email: "test@mail.com",
-                          is_manager: false,
-                          is_general_manager: false,
-                          id: '057231ee-91a9-404f-97ea-0f1a344de526'
-                        },
-                        {
-                          email: "test@mail.com",
-                          is_manager: true,
-                          is_general_manager: false,
-                          id: '057231ee-91a9-404f-97ea-0f1a344de527'
-                        },
-                        {
-                          email: "test@mail.com",
-                          is_manager: false,
-                          is_general_manager: false,
-                          id: '057231ee-91a9-404f-97ea-0f1a344de520'
-                        },
-                        {
-                          email: "test@mail.com",
-                          is_manager: true,
-                          is_general_manager: false,
-                          id: '057231ee-91a9-404f-97ea-0f1a344de528'
+                            "id": "456789",
+                            "name": "second",
+                            "users":
+                                [
+                                    {
+                                        email: "test@mail.com",
+                                        is_manager: true,
+                                        is_general_manager: false,
+                                        id: '057231ee-91a9-404f-97ea-0f1a344de527'
+                                    },
+                                    {
+                                        email: "test@mail.com",
+                                        is_manager: false,
+                                        is_general_manager: false,
+                                        id: '057231ee-91a9-404f-97ea-0f1a344de520'
+                                    },
+                                    {
+                                        email: "test@mail.com",
+                                        is_manager: false,
+                                        is_general_manager: false,
+                                        id: '057231ee-91a9-404f-97ea-0f1a344de528'
+                                    }
+                                ]
                         }
                     ]
-                }
             })
         )
     })
