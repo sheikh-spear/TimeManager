@@ -7,6 +7,8 @@ defmodule TimeManager.Account do
   alias TimeManager.Repo
 
   alias TimeManager.Account.User
+  # alias TimeManager.ClockPointer
+  # alias TimeManager.ClockPointer.Clock
 
   @doc """
   Returns the list of users.
@@ -35,6 +37,9 @@ defmodule TimeManager.Account do
       ** (Ecto.NoResultsError)
 
   """
+
+  def get_user_id_using_email(email), do: Repo.get_by(User, email: email).id
+
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """

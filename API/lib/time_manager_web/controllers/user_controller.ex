@@ -4,6 +4,7 @@ defmodule TimeManagerWeb.UserController do
   alias TimeManager.Account
   alias TimeManager.Account.User
   alias TimeManager.Repo
+  import Ecto.Query
 
   action_fallback TimeManagerWeb.FallbackController
 
@@ -34,9 +35,28 @@ defmodule TimeManagerWeb.UserController do
     end
   end
 
+  def get_working_time(conn, params) do
+    id = conn.private.plug_session["current_user_id"]
+    query = Ecto.Query.from(TimeManager.WorkingTimeTracker.WorkingTime, where: [user: ^id], select: [:start, :end])
+    workingtimes = Repo.all(query)
+    render(conn, "working_times.json", workingtimes: workingtimes)
+  end
+
+  def punch_clock(conn, params) do
+    id = conn.private.plug_session["current_user_id"]
+    user = Account.get_user!(id)
+    if user.status == true do
+      TimeManager.WorkingTimeTracker.create_working_time(%{start: user.start, end: NaiveDateTime.utc_now, user: id})
+      Account.update_user(user, %{status: false, start: nil})
+    end
+    if user.status == false do
+      Account.update_user(user, %{status: true, start: DateTime.utc_now})
+    end
+    render(conn, "show.json", user: user)
+  end
+
   def find_user_with_email(conn, %{"email" => email}) do
     query = Repo.get_by(User, email: email)
-    IO.inspect query
     render(conn, "show.json", user: query);
   end
 

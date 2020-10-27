@@ -6,6 +6,10 @@ defmodule TimeManagerWeb.UserView do
     %{data: render_many(users, UserView, "user.json")}
   end
 
+  def render("working_times.json", %{workingtimes: workingtimes}) do
+    %{data: render_many(workingtimes, UserView, "working_time.json")}
+  end
+  
   def render("show.json", %{user: user}) do
     %{data: render_one(user, UserView, "user.json")}
   end
@@ -14,7 +18,9 @@ defmodule TimeManagerWeb.UserView do
     %{
       id: user.id, 
       email: user.email,
-      is_active: user.is_active
+      is_active: user.is_active,
+      is_manager: user.is_manager,
+      is_general_manager: user.is_general_manager
     }
   end
 
@@ -23,9 +29,18 @@ defmodule TimeManagerWeb.UserView do
 			data: %{
 				user: %{
 					id: user.id,
-					email: user.email
+					email: user.email,
+          is_manager: user.is_manager,
+          is_general_manager: user.is_general_manager
 				}
 			}
 		}
-	end
+  end
+
+  def render("working_time.json", %{user: workingtime}) do
+    %{
+        start: workingtime.start,
+        end: workingtime.end
+    }
+  end
 end

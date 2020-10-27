@@ -18,8 +18,10 @@ defmodule TimeManagerWeb.Router do
   end
 
 	scope "/api", TimeManagerWeb do
-		pipe_through [:api, :api_auth]
-		resources "/users", UserController, except: [:new, :edit]
+    pipe_through [:api, :api_auth]
+    get "/users/punch_clock", UserController, :punch_clock
+    get "/users/working_times", UserController, :get_working_time
+    resources "/users", UserController, except: [:new, :edit]
 	end
 
   # Enables LiveDashboard only for developmentmi
@@ -31,7 +33,6 @@ defmodule TimeManagerWeb.Router do
   # as long as you are also using SSL (which you should anyway).
   if Mix.env() in [:dev, :test] do
     import Phoenix.LiveDashboard.Router
-
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
       live_dashboard "/dashboard", metrics: TimeManagerWeb.Telemetry
@@ -39,8 +40,7 @@ defmodule TimeManagerWeb.Router do
   end
 
 	defp ensure_autheticated(conn, _opts) do
-		current_user_id = get_session(conn, :current_user_id)
-
+    current_user_id = get_session(conn, :current_user_id)
 		if current_user_id do
 			conn
 		else

@@ -7,7 +7,10 @@ defmodule TimeManager.Repo.Migrations.CreateUsers do
       add :email, :string, null: false 
       add :password_hash, :string
       add :is_active, :boolean, default: false, null: false
-      add :working_time, :string
+      add :is_manager, :boolean, default: false, null: false
+      add :is_general_manager, :boolean, default: false, null: false
+      add :start, :naive_datetime
+      add :status, :boolean, default: false
       timestamps()
     end
 
