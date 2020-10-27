@@ -35,6 +35,37 @@ defmodule TimeManagerWeb.UserController do
     end
   end
 
+  def promote(conn, params) do
+    user = Repo.get_by(User, email: params["email"])
+    if user == nil do
+      render(conn, "error.json", user: "User does not exist")
+    end
+    if user.is_manager == true do
+      render(conn, "error.json", user: "User is already a manager")
+    end
+    Account.update_user(user, %{is_manager: true})
+    render(conn, "show.json", user: Repo.get_by(User, email: params["email"]));
+  end
+
+  def demote(conn, params) do
+    user = Repo.get_by(User, email: params["email"])
+    if user == nil do
+      render(conn, "error.json", user: "User does not exist")
+    end
+    if user.is_manager == false do
+      render(conn, "error.json", user: "User is not a manager")
+    end
+    Account.update_user(user, %{is_manager: false})
+    render(conn, "show.json", user: Repo.get_by(User, email: params["email"]));
+  end
+
+  def get_user_working_time(conn, params) do
+    user = Repo.get_by(User, email: params["email"])
+    if user == nil do
+      render(conn, "error.json", user: "User does not exist")
+    end
+    fetch_working_time(conn, user.id)
+  end
 
   def get_team_member_working_time(conn, params) do
     user = Repo.get_by(User, email: params["email"])
@@ -58,13 +89,13 @@ defmodule TimeManagerWeb.UserController do
   def add_user_to_team(conn, params) do
     user = Repo.get_by(User, email: params["email"])
     Account.update_user(user, %{manager: conn.private.plug_session["current_user_id"]})
-    render(conn, "show.json", user: user);
+    render(conn, "show.json", user: Repo.get_by(User, email: params["email"]));
   end
 
   def remove_user_from_team(conn, params) do
     user = Repo.get_by(User, email: params["email"])
     Account.update_user(user, %{manager: nil})
-    render(conn, "show.json", user: user);
+    render(conn, "show.json", user: Repo.get_by(User, email: params["email"]));
   end
 
   def list_users_from_team(conn, params) do
@@ -84,7 +115,7 @@ defmodule TimeManagerWeb.UserController do
     if user.status == false do
       Account.update_user(user, %{status: true, start: DateTime.utc_now})
     end
-    render(conn, "show.json", user: user)
+    render(conn, "show.json", user: Account.get_user!(id))
   end
 
   def find_user_with_email(conn, %{"email" => email}) do
@@ -92,7 +123,16 @@ defmodule TimeManagerWeb.UserController do
     render(conn, "show.json", user: query);
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete_account(conn, params) do
+    delete(conn, conn.private.plug_session["current_user_id"])
+  end
+
+  def delete_user_account(conn, params) do
+    user = Repo.get_by(User, email: params["email"])
+    delete(conn, user.id)
+  end
+  
+  def delete(conn, id) do
     user = Account.get_user!(id)
 
     with {:ok, %User{}} <- Account.delete_user(user) do

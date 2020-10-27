@@ -14,11 +14,23 @@ defmodule TimeManagerWeb.Router do
     plug :ensure_manager
   end
 
+  pipeline :api_general_manager do
+    plug :ensure_general_manager
+  end
+
+  scope "/api", TimeManagerWeb do
+    pipe_through [:api, :api_general_manager]
+    post "/general_manager/delete_user_account", UserController, :delete_user_account
+    post "/general_manager/promote", UserController, :promote
+    post "/general_manager/demote", UserController, :demote
+    post "/general_manager/get_user_working_time", UserController, :get_user_working_time
+  end
+
   scope "/api", TimeManagerWeb do
     pipe_through [:api, :api_manager]
     post "/manager/add_user_to_team", UserController, :add_user_to_team
     post "/manager/remove_user_from_team", UserController, :remove_user_from_team
-    get "/manager/list_users_from_team", UserController, :list_users_from_team
+    get  "/manager/list_users_from_team", UserController, :list_users_from_team
     post "/manager/get_team_member_working_time", UserController, :get_team_member_working_time
   end
 
@@ -33,6 +45,7 @@ defmodule TimeManagerWeb.Router do
     pipe_through [:api, :api_auth]
     get "/users/punch_clock", UserController, :punch_clock
     get "/users/working_times", UserController, :get_working_time
+    post "/users/delete_account", UserController, :delete_account
     resources "/users", UserController, except: [:new, :edit]
 	end
 
@@ -55,6 +68,20 @@ defmodule TimeManagerWeb.Router do
   defp ensure_manager(conn, _opts) do
     current_user_id = get_session(conn, :current_user_id)
     if current_user_id != nil and current_user_id != "" and TimeManager.Account.get_user!(current_user_id).is_manager == true do
+      conn
+    else
+      conn
+			|> put_status(:unauthorized)
+			|> put_view(TimeManagerWeb.ErrorView)
+			|> render("401.json", message: "Unauthenticated user")
+			|> halt()
+    end
+  end
+
+
+  defp ensure_general_manager(conn, _opts) do
+    current_user_id = get_session(conn, :current_user_id)
+    if current_user_id != nil and current_user_id != "" and TimeManager.Account.get_user!(current_user_id).is_general_manager == true do
       conn
     else
       conn
