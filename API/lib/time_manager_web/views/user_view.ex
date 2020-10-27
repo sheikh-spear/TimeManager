@@ -16,11 +16,10 @@ defmodule TimeManagerWeb.UserView do
 
   def render("user.json", %{user: user}) do
     %{
-      id: user.id, 
       email: user.email,
-      is_active: user.is_active,
       is_manager: user.is_manager,
-      is_general_manager: user.is_general_manager
+      is_general_manager: user.is_general_manager,
+      manager: user.manager
     }
   end
 
@@ -41,6 +40,12 @@ defmodule TimeManagerWeb.UserView do
     %{
         start: workingtime.start,
         end: workingtime.end
+    }
+  end
+
+  def render("error.json", %{user: message}) do
+    %{
+      error: message
     }
   end
 end

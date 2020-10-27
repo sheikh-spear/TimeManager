@@ -8,7 +8,19 @@ defmodule TimeManagerWeb.Router do
 
 	pipeline :api_auth do
 		plug :ensure_autheticated
-	end
+  end
+  
+  pipeline :api_manager do
+    plug :ensure_manager
+  end
+
+  scope "/api", TimeManagerWeb do
+    pipe_through [:api, :api_manager]
+    post "/manager/add_user_to_team", UserController, :add_user_to_team
+    post "/manager/remove_user_from_team", UserController, :remove_user_from_team
+    get "/manager/list_users_from_team", UserController, :list_users_from_team
+    post "/manager/get_team_member_working_time", UserController, :get_team_member_working_time
+  end
 
   scope "/api", TimeManagerWeb do
     pipe_through :api
@@ -36,6 +48,20 @@ defmodule TimeManagerWeb.Router do
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
       live_dashboard "/dashboard", metrics: TimeManagerWeb.Telemetry
+    end
+  end
+
+
+  defp ensure_manager(conn, _opts) do
+    current_user_id = get_session(conn, :current_user_id)
+    if current_user_id != nil and current_user_id != "" and TimeManager.Account.get_user!(current_user_id).is_manager == true do
+      conn
+    else
+      conn
+			|> put_status(:unauthorized)
+			|> put_view(TimeManagerWeb.ErrorView)
+			|> render("401.json", message: "Unauthenticated user")
+			|> halt()
     end
   end
 

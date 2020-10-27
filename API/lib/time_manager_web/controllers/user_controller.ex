@@ -35,11 +35,43 @@ defmodule TimeManagerWeb.UserController do
     end
   end
 
+
+  def get_team_member_working_time(conn, params) do
+    user = Repo.get_by(User, email: params["email"])
+    if user == nil or user.manager != conn.private.plug_session["current_user_id"] do
+      render(conn, "error.json", user: "User is not in your team")
+    end
+    fetch_working_time(conn, user.id)
+  end
+
   def get_working_time(conn, params) do
-    id = conn.private.plug_session["current_user_id"]
+    fetch_working_time(conn, conn.private.plug_session["current_user_id"])
+  end
+
+  def fetch_working_time(conn, id) do
     query = Ecto.Query.from(TimeManager.WorkingTimeTracker.WorkingTime, where: [user: ^id], select: [:start, :end])
     workingtimes = Repo.all(query)
     render(conn, "working_times.json", workingtimes: workingtimes)
+  end
+
+
+  def add_user_to_team(conn, params) do
+    user = Repo.get_by(User, email: params["email"])
+    Account.update_user(user, %{manager: conn.private.plug_session["current_user_id"]})
+    render(conn, "show.json", user: user);
+  end
+
+  def remove_user_from_team(conn, params) do
+    user = Repo.get_by(User, email: params["email"])
+    Account.update_user(user, %{manager: nil})
+    render(conn, "show.json", user: user);
+  end
+
+  def list_users_from_team(conn, params) do
+    id = conn.private.plug_session["current_user_id"]
+    query = Ecto.Query.from(User, where: [manager: ^id], select: [:email, :is_manager, :is_general_manager])
+    users = Repo.all(query)
+    render(conn, "index.json", users: users)
   end
 
   def punch_clock(conn, params) do

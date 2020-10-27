@@ -13,13 +13,14 @@ defmodule TimeManager.Account.User do
     field :is_general_manager, :boolean, default: false
     field :start, :naive_datetime, default: nil
     field :status, :boolean, default: false
+    field :manager, :binary_id
     timestamps()
   end
 
   @doc false
   def changeset(user, attrs) do
     user
-		|> cast(attrs, [:email, :is_active, :password, :is_manager, :is_general_manager, :start, :status])
+		|> cast(attrs, [:email, :is_active, :password, :is_manager, :is_general_manager, :start, :status, :manager])
 		|> validate_required([])
     |> unique_constraint(:email)
 		|> put_password_hash()

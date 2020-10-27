@@ -11,6 +11,7 @@ defmodule TimeManager.Repo.Migrations.CreateUsers do
       add :is_general_manager, :boolean, default: false, null: false
       add :start, :naive_datetime
       add :status, :boolean, default: false
+      add :manager, references(:users, on_delete: :nothing, type: :binary_id)
       timestamps()
     end
 
