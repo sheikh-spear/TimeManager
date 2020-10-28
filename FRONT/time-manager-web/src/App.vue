@@ -1,11 +1,34 @@
 <template>
   <div id="app">
-    <!-- We pass our user state across the component tree thanks to router-view
+
+    <!-- <Navbar /> -->
+    <div class="app-container">
+      <header class="sidebar">
+        <div class="sidebar__details">
+            <img src="https://via.placeholder.com/60x60" alt="">
+            <div class="sidebar__details-inner">
+              <p id="mail">email@email.com</p>
+              <p id="role">general manager</p>
+            </div>
+          </div>
+        <nav class="sidebar__navigation">
+          <ul>
+            <li><a href="#">dashboard</a></li>
+            <li><a href="#">profile</a></li>
+            <li><a href="#">employees</a></li>
+            <li><a href="#">teams</a></li>
+          </ul>
+          
+        </nav>
+        <button class="sidebar__button">logout</button>
+      </header>
+    <main class="dashboard">
+      main
+      <!-- We pass our user state across the component tree thanks to router-view
     component that acts as a placeholder for another children component
     We ensure that all components share the same user state -->
-    <Navbar />
-    <div class="container">
-    <router-view :user="user"></router-view>
+      <router-view :user="user"></router-view>
+    </main>
     </div>
 
   </div>
@@ -13,12 +36,12 @@
 
 <script>
 import axios from "axios";
-import Navbar from "./views/Navbar";
+// import Navbar from "./views/Navbar";
 
 export default {
   name: "App",
   components: {
-    Navbar
+    // Navbar
   },
   data() {
     return {
@@ -38,11 +61,96 @@ export default {
 <style lang="scss">
 @import "./assets/style.scss";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./styles/index.scss";
+
 #app {
   @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
   font-family: "Noto Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.app-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  width: 100vw;
+  height: 100vh;
+}
+
+.dashboard {
+  background-color: #f5f8ff;
+  grid-column-start: 4;
+  grid-column-end: -1;
+}
+
+.sidebar {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  align-items: flex-start;
+
+  &__navigation {
+    margin-top: 50px;
+    width: 100%;
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        a {
+          color: $dark-grey;
+          display: block;
+          padding: 15px 0;
+          text-transform: capitalize;
+          font-weight: 600;
+          font-size: 18px;
+
+          &:hover {
+            color: $primary;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  &__details {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+
+    width: 100%;
+    img {
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    &-inner {
+      #mail {
+        margin: 3px 0;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      #role {
+        margin: 3px 0;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  &__button {
+    margin-top: auto;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+  }
 }
 </style>
