@@ -13,7 +13,7 @@ defmodule TimeManager.Account.User do
     field :is_general_manager, :boolean, default: false
     field :start, :naive_datetime, default: nil
     field :status, :boolean, default: false
-    field :manager, :binary_id
+    field :manager, {:array, :binary_id}
     timestamps()
   end
 
