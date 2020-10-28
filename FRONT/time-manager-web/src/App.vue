@@ -1,24 +1,26 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <HomePage/>
+    <Navbar />
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
-
 </template>
 
 <script>
-
-import HomePage from './components/Views/HomePage.vue'
+import Navbar from "./Views/Navbar";
 
 export default {
   name: "App",
   components: {
-    HomePage
-  }
+    Navbar,
+  },
 };
 </script>
 
 <style lang="scss">
+@import "./assets/style.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
 #app {
   @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
   font-family: "Noto Sans", sans-serif;
