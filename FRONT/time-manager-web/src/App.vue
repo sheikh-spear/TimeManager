@@ -13,7 +13,7 @@
 
 <script>
 import axios from "axios";
-import Navbar from "./Views/Navbar";
+import Navbar from "./views/Navbar";
 
 export default {
   name: "App",
