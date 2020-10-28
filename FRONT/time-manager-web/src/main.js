@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
-import Login from './components/Login.vue'
-import BootstrapVue from 'bootstrap-vue'
+import Login from './views/Login.vue'
+import HomePage from './components/Views/HomePage.vue';
+import Profile from './views/Profile.vue';
+import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
@@ -10,7 +12,9 @@ Vue.use(BootstrapVue)
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/login', component: Login }
+  { path: '/', component: HomePage },
+  { path: '/login', component: Login },
+  { path: '/profile', component: Profile }
 ]
 
 const router = new VueRouter({

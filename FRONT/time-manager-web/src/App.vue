@@ -1,19 +1,28 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <HomePage/>
+    <!-- We pass our user state across the component tree thanks to router-view
+    component that acts as a placeholder for another children component
+    We ensure that all components share the same user state -->
+    <router-view :user="user"></router-view>
   </div>
-
 </template>
 
 <script>
-
-import HomePage from './components/Views/HomePage.vue'
+import axios from "axios";
 
 export default {
   name: "App",
-  components: {
-    HomePage
+  data() {
+    return {
+      user: null
+    };
+  },
+  created() {
+    // => Asnyc API call here <=
+    axios.get("/api/users").then(response => {
+      //get the user and store it to the local state of our App parent component
+      this.user = response.data;
+    });
   }
 };
 </script>
