@@ -1,20 +1,37 @@
 <template>
   <div id="app">
+    <!-- We pass our user state across the component tree thanks to router-view
+    component that acts as a placeholder for another children component
+    We ensure that all components share the same user state -->
     <Navbar />
     <div class="container">
-      <router-view></router-view>
+    <router-view :user="user"></router-view>
     </div>
+
   </div>
 </template>
 
 <script>
-import Navbar from "./Views/Navbar";
+import axios from "axios";
+import Navbar from "./views/Navbar";
 
 export default {
   name: "App",
   components: {
-    Navbar,
+    Navbar
   },
+  data() {
+    return {
+      user: null
+    };
+  },
+  created() {
+    // => Asnyc API call here <=
+    axios.get("/api/users").then(response => {
+      //get the user and store it to the local state of our App parent component
+      this.user = response.data;
+    });
+  }
 };
 </script>
 
