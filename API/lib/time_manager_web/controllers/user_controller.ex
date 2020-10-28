@@ -88,19 +88,25 @@ defmodule TimeManagerWeb.UserController do
 
   def add_user_to_team(conn, params) do
     user = Repo.get_by(User, email: params["email"])
-    Account.update_user(user, %{manager: conn.private.plug_session["current_user_id"]})
+    team = nil
+    if user.manager != nil do
+      Account.update_user(user, %{manager: user.manager ++ [conn.private.plug_session["current_user_id"]]})
+    else
+      Account.update_user(user, %{manager: [conn.private.plug_session["current_user_id"]]})
+    end
     render(conn, "show.json", user: Repo.get_by(User, email: params["email"]));
   end
 
   def remove_user_from_team(conn, params) do
     user = Repo.get_by(User, email: params["email"])
-    Account.update_user(user, %{manager: nil})
+    Account.update_user(user, %{manager: user.manager -- [conn.private.plug_session["current_user_id"]]})
     render(conn, "show.json", user: Repo.get_by(User, email: params["email"]));
   end
 
   def list_users_from_team(conn, params) do
     id = conn.private.plug_session["current_user_id"]
-    query = Ecto.Query.from(User, where: [manager: ^id], select: [:email, :is_manager, :is_general_manager])
+    query = Ecto.Query.from(u in User, where: ^id in u.manager)
+    #query = from(User, where: [manager: ^id], select: [:email, :is_manager, :is_general_manager])
     users = Repo.all(query)
     render(conn, "index.json", users: users)
   end

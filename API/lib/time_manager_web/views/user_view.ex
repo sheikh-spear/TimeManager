@@ -19,7 +19,6 @@ defmodule TimeManagerWeb.UserView do
       email: user.email,
       is_manager: user.is_manager,
       is_general_manager: user.is_general_manager,
-      manager: user.manager
     }
   end
 

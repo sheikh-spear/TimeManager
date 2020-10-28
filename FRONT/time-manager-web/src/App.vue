@@ -3,15 +3,23 @@
     <!-- We pass our user state across the component tree thanks to router-view
     component that acts as a placeholder for another children component
     We ensure that all components share the same user state -->
+    <Navbar />
+    <div class="container">
     <router-view :user="user"></router-view>
+    </div>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Navbar from "./Views/Navbar";
 
 export default {
   name: "App",
+  components: {
+    Navbar
+  },
   data() {
     return {
       user: null
@@ -28,6 +36,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./assets/style.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
 #app {
   @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
   font-family: "Noto Sans", sans-serif;

@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
-import Login from './views/Login.vue'
-import HomePage from './components/Views/HomePage.vue';
-import Profile from './views/Profile.vue';
-import BootstrapVue from 'bootstrap-vue';
+import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Login from './views/Login.vue'
+import HomePage from './views/HomePage'
+import Profile from './views/Profile.vue'
+import UserList from './views/UserList'
+import TeamList from './views/TeamList'
+import TeamDetail from './views/TeamDetail'
+
 
 Vue.use(BootstrapVue)
 //Vue Router Config
@@ -14,7 +18,10 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', component: HomePage },
   { path: '/login', component: Login },
-  { path: '/profile', component: Profile }
+  { path: '/profile', component: Profile },
+  { path: '/teams', component: TeamList },
+  { path: '/users', component: UserList },
+  { path: '/team/:id', component: TeamDetail }
 ]
 
 const router = new VueRouter({
