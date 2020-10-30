@@ -1,0 +1,24 @@
+.btn {
+    border-radius: 8px;
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+
+    &-primary {
+        background: #2f80ed;
+        color: #ffffff;
+    }
+
+    &-default {
+        background: transparent;
+        color: $dark-grey;
+        border: 1px solid $dark-grey;
+    }
+}

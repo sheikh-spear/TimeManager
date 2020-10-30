@@ -16,7 +16,6 @@ export const handlers = [
                 }
             })
         )
-
         //Error case here
         // return res(
         //     // Respond with a 500 status code
@@ -27,6 +26,17 @@ export const handlers = [
         //         }
         //     })
         // )
+    }),
+    rest.get('/api/users', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                email: "test@mail.com",
+                is_manager: true,
+                is_general_manager: true,
+                id: '057231ee-91a9-404f-97ea-0f1a344de529'
+            })
+        )
     }),
     // Handles a GET /user request
     rest.get('/api/users/list', (req, res, ctx) => {
