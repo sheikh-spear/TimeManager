@@ -79,7 +79,7 @@ export default {
 }
 
 .dashboard {
-  background-color: #f5f8ff;
+  background-color: #d6e3ff;
   grid-column-start: 4;
   grid-column-end: -1;
 }
