@@ -9,8 +9,10 @@ import Profile from './views/Profile.vue'
 import UserList from './views/UserList'
 import TeamList from './views/TeamList'
 import TeamDetail from './views/TeamDetail'
-
-
+import UserDashboard from './views/UserDashboard'
+import ToggleButton from 'vue-js-toggle-button'
+ 
+Vue.use(ToggleButton)
 Vue.use(BootstrapVue)
 //Vue Router Config
 Vue.use(VueRouter)
@@ -21,6 +23,7 @@ const routes = [
   { path: '/profile', component: Profile },
   { path: '/teams', component: TeamList },
   { path: '/users', component: UserList },
+  { path: '/users/:id', component: UserDashboard },
   { path: '/team/:id', component: TeamDetail }
 ]
 
