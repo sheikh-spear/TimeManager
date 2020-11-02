@@ -1,5 +1,10 @@
 #sidebar:target {
 
+    //Adapt the dashboard space here
+    + .dashboard {
+        grid-column: 4 / -1;
+    }
+
     @include mobile {
         grid-column-start: 1;
         grid-column-end: 4;

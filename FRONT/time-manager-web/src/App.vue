@@ -100,7 +100,6 @@ export default {
 
 .dashboard {
   background-color: #d6e3ff;
-  /* grid-column-start: 4;
-  grid-column-end: -1; */
+  grid-column: 2 / -1;
 }
 </style>
