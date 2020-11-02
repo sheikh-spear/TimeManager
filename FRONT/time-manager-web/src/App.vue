@@ -3,8 +3,14 @@
 
     <!-- <Navbar /> -->
     <div class="app-container">
-      <header class="sidebar">
-        <div class="sidebar__details">
+      <header class="sidebar" id="sidebar">
+        <a class="sidebar__burger-btn" href="#sidebar">
+            <span class="burger-icon">
+              
+            </span>
+          </a>
+        <div class="sidebar-inner">
+          <div class="sidebar__details">
             <img src="https://via.placeholder.com/60x60" alt="">
             <div class="sidebar__details-inner">
               <p id="mail">email@email.com</p>
@@ -21,6 +27,7 @@
           
         </nav>
         <button class="sidebar__button">logout</button>
+        </div>
       </header>
     <main class="dashboard">
       main
@@ -73,14 +80,21 @@ export default {
 
 .app-container {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
   width: 100vw;
   height: 100vh;
+
+  @include mobile {
+    grid-template-columns: minmax(80px, 10%) 1fr;
+  }
+
+  @include laptop-l {
+    grid-template-columns: minmax(150px, 25%) 1fr;
+  }
 }
 
 .dashboard {
   background-color: #d6e3ff;
-  grid-column-start: 4;
-  grid-column-end: -1;
+  /* grid-column-start: 4;
+  grid-column-end: -1; */
 }
 </style>

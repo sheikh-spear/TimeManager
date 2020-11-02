@@ -1,11 +1,84 @@
+#sidebar:target {
+    color: red;
+}
+
 .sidebar {
-    grid-column-start: 1;
-    grid-column-end: 4;
+    // grid-column-start: 1;
+    // grid-column-end: 4;
     padding: 60px 40px;
-    display: flex;
     flex-direction: column;
     /* justify-content: flex-start; */
     align-items: flex-start;
+
+    @include mobile {
+        display: flex;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @include tablet {
+        
+    }
+
+    @include laptop-m {
+        
+    }
+
+    @include laptop-l {
+        
+    }
+
+    &-inner {
+        height: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+
+        @include mobile {
+            display: none;
+        }
+
+        @include laptop-l {
+            display: flex;
+        }
+    }
+
+    &__burger-btn {
+        display: block;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        .burger-icon {
+            display: block;
+            height: 3px;
+            width: 30px;
+            background-color: black;
+            position: relative;
+
+            &:before, &:after {
+                content: "";
+                position: absolute;
+                height: 3px;
+                width: 30px;
+                background-color: black;
+            }
+
+            &:before {
+                top: -10px;
+            }
+
+            &:after {
+                bottom: -10px;
+            }
+        }
+
+    
+
+
+    }
   
     &__navigation {
       margin-top: 50px;
