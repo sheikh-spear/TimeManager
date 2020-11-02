@@ -82,14 +82,15 @@ export default {
   display: grid;
   width: 100vw;
   height: 100vh;
+  grid-template-columns: repeat(12, 1fr);
 
-  @include mobile {
+  /* @include mobile {
     grid-template-columns: minmax(80px, 10%) 1fr;
   }
 
   @include laptop-l {
     grid-template-columns: minmax(150px, 25%) 1fr;
-  }
+  } */
 }
 
 .dashboard {
