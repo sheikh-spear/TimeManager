@@ -5,6 +5,7 @@
                 :labels="{checked: 'Weekly', unchecked: 'Daily'}" :width="110" :height="35" :font-size="20"
                 :switch-color="{checked: 'linear-gradient(lightgray, white)', unchecked: 'linear-gradient(lightgray, white)'}"
                 @change="toggleMode"/>
+                <input type="date" value="2020-10-25" v-on:change="date = new Date($event.target.value)">
         </div>
 
         <div class="small">
@@ -30,7 +31,9 @@ export default {
                 {start: new Date("2020-10-24 09:02:00"), end: new Date("2020-10-24 14:02:00")},
                 {start: new Date("2020-10-24 15:06:02"), end: new Date("2020-10-24 18:15:00")},
                 {start: new Date("2020-10-25 09:02:00"), end: new Date("2020-10-25 14:02:00")},
-                {start: new Date("2020-10-25 10:02:00"), end: new Date("2020-10-25 12:02:00")}
+                {start: new Date("2020-10-25 10:02:00"), end: new Date("2020-10-25 12:02:00")},
+                {start: new Date("2020-11-02 09:01:00"), end: new Date("2020-11-02 13:53:00")},
+                {start: new Date("2020-11-02 14:12:00"), end: new Date("2020-11-02 17:02:00")}
             ]
         }
     },

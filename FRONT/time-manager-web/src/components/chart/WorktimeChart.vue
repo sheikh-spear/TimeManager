@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import BarChart from './BarChart.js'
-import HorizontalBarChart from './HorizontalBarChart.js'
+import BarChart from './BarChart'
+import HorizontalBarChart from './HorizontalBarChart'
 
 const weekday=[
     "Monday",
@@ -31,7 +31,10 @@ export default {
         this.showWorkingTime()
     },
     watch: {
-        mode () {
+        mode(){
+            this.showWorkingTime()
+        },
+        date(){
             this.showWorkingTime()
         }
     },
@@ -142,6 +145,7 @@ export default {
             }else{
                 console.error("WorkingtimeChart, worktimes shouln't by empty !")
             }
+            this.renderKey++;
         }
     }
 }
