@@ -6,8 +6,7 @@
     }
 
     @include mobile {
-        grid-column-start: 1;
-        grid-column-end: 4;
+        grid-column: 1 / 4;
     }
 
     .sidebar__close-btn {
@@ -26,6 +25,8 @@
 .sidebar {
     flex-direction: column;
     align-items: flex-start;
+    transition-property: grid-column;
+    transition-duration: 2s;
 
     @include mobile {
         display: flex;
