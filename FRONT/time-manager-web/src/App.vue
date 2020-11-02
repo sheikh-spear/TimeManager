@@ -3,39 +3,8 @@
 
     <!-- <Navbar /> -->
     <div class="app-container">
-      <header class="sidebar" id="sidebar">
-        <a class="sidebar__burger-btn" href="#sidebar">
-            <span class="burger-icon">
-              
-            </span>
-          </a>
-
-          <a class="sidebar__close-btn" href="#">
-            <span class="close-icon">
-            </span>
-          </a>
-        <div class="sidebar-inner">
-          <div class="sidebar__details">
-            <img src="https://via.placeholder.com/60x60" alt="">
-            <div class="sidebar__details-inner">
-              <p id="mail">email@email.com</p>
-              <p id="role">general manager</p>
-            </div>
-          </div>
-        <nav class="sidebar__navigation">
-          <ul>
-            <li><a href="#">dashboard</a></li>
-            <li><a href="#">profile</a></li>
-            <li><a href="#">employees</a></li>
-            <li><a href="#">teams</a></li>
-          </ul>
-          
-        </nav>
-        <button class="sidebar__button">logout</button>
-        </div>
-      </header>
+    <Sidebar />
     <main class="dashboard">
-      main
       <!-- We pass our user state across the component tree thanks to router-view
     component that acts as a placeholder for another children component
     We ensure that all components share the same user state -->
@@ -49,11 +18,12 @@
 <script>
 import axios from "axios";
 // import Navbar from "./views/Navbar";
+import Sidebar from "./components/Sidebar";
 
 export default {
   name: "App",
   components: {
-    // Navbar
+    Sidebar
   },
   data() {
     return {
