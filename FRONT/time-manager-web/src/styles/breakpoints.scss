@@ -1,5 +1,4 @@
 //Here we define our breakpoints for responsive style 
-
 @mixin laptop-l {
     @media screen and (min-width: 1600px) {
         @content;
@@ -7,6 +6,12 @@
 }
 
 @mixin laptop-m {
+    @media screen and (min-width: 1440px) {
+        @content;
+    }
+}
+
+@mixin laptop-s {
     @media screen and (min-width: 1024px) {
         @content;
     }

@@ -26,7 +26,6 @@
 .sidebar {
     flex-direction: column;
     align-items: flex-start;
-    padding: 30px;
 
     @include mobile {
         display: flex;
@@ -40,10 +39,12 @@
     }
 
     @include tablet {
-        
+        padding: 15px;
     }
 
     @include laptop-m {
+
+        padding: 30px;
         
     }
 
@@ -104,9 +105,6 @@
             display: none;
         }
 
-    
-
-
     }
 
     &__close-btn {
@@ -121,7 +119,6 @@
             position: relative;
             height: 16px;
             width: 16px;
-            // display: block;
 
             &:before, &:after {
                 content: "";
@@ -130,54 +127,79 @@
                 background-color: black;
                 position: absolute;
                 bottom: 50%;
-            } 
+            }
 
             &:before {
-                transform: rotate(45deg);  
+                transform: rotate(45deg);
             }
 
             &:after {
                 transform: rotate(-45deg); 
             }
+            
         }
-
 
     }
-  
+
     &__navigation {
         font-weight: 600;
-        font-size: 18px;
-      margin-top: 50px;
-      width: 100%;
-      ul {
-        list-style: none;
-        padding: 0;
-  
-        li {
-          a {
-            color: $dark-grey;
-            display: block;
-            padding: 15px 0;
-            text-transform: capitalize;
-  
-            &:hover {
-              color: $primary;
-              text-decoration: none;
-            }
-          }
+        width: 100%;
+
+        @include tablet {
+            font-size: 14px;
+            margin: auto 0;
         }
-      }
+
+        @include laptop-s {
+            margin-top: 50px;
+            font-size: 18px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+  
+            li {
+                a {
+                    color: $dark-grey;
+                    display: block;
+                    padding: 15px 0;
+                    text-transform: capitalize;
+  
+                &:hover {
+                    color: $primary;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
     }
   
     &__details {
       display: flex;
       align-items: center;
       padding: 20px 0;
-  
       width: 100%;
+
+       @include tablet {
+        margin-top: 30px;
+       }
+      
       img {
         border-radius: 50%;
         margin-right: 15px;
+
+        @include tablet {
+            width: 40px;
+        height: 40px;
+        }
+
+        @include laptop-s {
+            width: 60px;
+            height: 60px;
+        }
+    
       }
   
       &-inner {
@@ -186,7 +208,13 @@
           margin: 3px 0;
 
           @include tablet {
+            font-size: 12px;
             font-weight: 600;
+          }
+
+          @include laptop-s {
+            font-weight: 600;
+            font-size: 16px;
           }
 
           @include laptop-m {
@@ -194,15 +222,20 @@
             font-size: 18px; 
           }
 
-        //   @include laptop-l {
-        //     font-weight: 600;
-        //     font-size: 18px;
-        //   }
         }
   
         #role {
           margin: 3px 0;
           text-transform: capitalize;
+
+          @include tablet {
+            font-size: 12px;
+          }
+
+          @include laptop-s {
+            font-weight: 400;
+            font-size: 14px;
+          }
         }
       }
     }
@@ -215,5 +248,13 @@
       font-weight: 600;
       text-transform: capitalize;
       cursor: pointer;
+
+      @include tablet {
+        font-size: 15px;
+      }
+
+      @include laptop-s {
+        font-size: 18px;
+      }
     }
   }
