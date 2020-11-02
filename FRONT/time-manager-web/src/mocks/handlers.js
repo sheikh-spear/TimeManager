@@ -134,5 +134,23 @@ export const handlers = [
                     ]
             })
         )
+    }),
+    // Handles request to GET the workingtimes from the user id 1
+    rest.get('/api/workingtime/b6d4-r4bf...', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                "data": [
+                    {start: new Date("2020-10-23 09:05:00"), end: new Date("2020-10-23 14:02:00")},
+                    {start: new Date("2020-10-23 10:02:00"), end: new Date("2020-10-23 12:02:00")},
+                    {start: new Date("2020-10-24 09:02:00"), end: new Date("2020-10-24 14:02:00")},
+                    {start: new Date("2020-10-24 15:06:02"), end: new Date("2020-10-24 18:15:00")},
+                    {start: new Date("2020-10-25 09:02:00"), end: new Date("2020-10-25 14:02:00")},
+                    {start: new Date("2020-10-25 10:02:00"), end: new Date("2020-10-25 12:02:00")},
+                    {start: new Date("2020-11-02 09:01:00"), end: new Date("2020-11-02 13:53:00")},
+                    {start: new Date("2020-11-02 14:12:00"), end: new Date("2020-11-02 17:02:00")}
+                ]
+            })
+        )
     })
 ]

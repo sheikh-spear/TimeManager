@@ -6,7 +6,7 @@
 
 
 <script>
-import UserWorktime from '../components/UserWorktime'
+import UserWorktime from '../components/Workingtime'
 
 export default {
   name: "HomePage",
