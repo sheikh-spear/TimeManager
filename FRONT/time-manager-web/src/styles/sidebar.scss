@@ -1,0 +1,69 @@
+.sidebar {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+  
+    &__navigation {
+      margin-top: 50px;
+      width: 100%;
+      ul {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          a {
+            color: $dark-grey;
+            display: block;
+            padding: 15px 0;
+            text-transform: capitalize;
+            font-weight: 600;
+            font-size: 18px;
+  
+            &:hover {
+              color: $primary;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  
+    &__details {
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+  
+      width: 100%;
+      img {
+        border-radius: 50%;
+        margin-right: 15px;
+      }
+  
+      &-inner {
+        #mail {
+          margin: 3px 0;
+          font-weight: 600;
+          font-size: 18px;
+        }
+  
+        #role {
+          margin: 3px 0;
+          text-transform: capitalize;
+        }
+      }
+    }
+  
+    &__button {
+      margin-top: auto;
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: capitalize;
+      cursor: pointer;
+    }
+  }
