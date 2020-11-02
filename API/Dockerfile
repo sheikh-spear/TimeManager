@@ -8,4 +8,4 @@ RUN mix local.hex --force
 
 RUN mix do compile
 
-CMD ["/app/entrypoint.sh"]
+CMD ["bash", "/app/entrypoint.sh"]

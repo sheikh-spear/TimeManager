@@ -1,10 +1,10 @@
-# entrypoint.sh
-
 #!/bin/bash
 # Docker entrypoint script.
 
 # Wait until Postgres is ready
-echo "penis"
+
+service postgresql start
+
 while ! pg_isready -q -h $PGHOST -p $PGPORT -U $PGUSER
 do
   echo "$(date) - waiting for database to start"
@@ -20,5 +20,5 @@ if [[ -z `psql -Atqc "\\list $PGDATABASE"` ]]; then
   echo "Database $PGDATABASE created."
 fi
 
-exec mix phx.server
+mix phx.server
 echo "Done"
