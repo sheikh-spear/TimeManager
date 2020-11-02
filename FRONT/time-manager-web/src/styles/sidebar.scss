@@ -5,6 +5,10 @@
         grid-column-end: 4;
     }
 
+    .sidebar__close-btn {
+        display: flex;
+    }
+
     .sidebar__burger-btn {
         display: none;
     }
@@ -92,6 +96,41 @@
         }
 
     
+
+
+    }
+
+    &__close-btn {
+        display: none;
+        height: 32px;
+        width: 32px;
+        justify-content: center;
+        align-items: center;
+
+        .close-icon {
+            position: relative;
+            height: 32px;
+            width: 32px;
+            // display: block;
+
+            &:before, &:after {
+                content: "";
+                height: 3px;
+                width: 30px;
+                background-color: black;
+                position: absolute;
+                bottom: 50%;
+            } 
+
+            &:before {
+                transform: rotate(45deg); 
+                
+            }
+
+            &:after {
+                transform: rotate(-45deg); 
+            }
+        }
 
 
     }

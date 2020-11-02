@@ -9,6 +9,11 @@
               
             </span>
           </a>
+
+          <a class="sidebar__close-btn" href="#">
+            <span class="close-icon">
+            </span>
+          </a>
         <div class="sidebar-inner">
           <div class="sidebar__details">
             <img src="https://via.placeholder.com/60x60" alt="">
