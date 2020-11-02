@@ -17,20 +17,26 @@
     .sidebar__burger-btn {
         display: none;
     }
+
+    .sidebar-inner {
+        display: flex;
+    }
 }
 
 .sidebar {
-    padding: 60px 40px;
     flex-direction: column;
     align-items: flex-start;
+    padding: 30px;
 
     @include mobile {
         display: flex;
-        padding: 0;
         justify-content: center;
         align-items: center;
         grid-column-start: 1;
         grid-column-end: 2;
+        box-sizing: border-box;
+        width: 100%;
+        overflow: hidden;
     }
 
     @include tablet {
@@ -42,10 +48,8 @@
     }
 
     @include laptop-l {
-
         grid-column-start: 1;
-    grid-column-end: 4;
-        
+        grid-column-end: 4;
     }
 
     &-inner {
@@ -107,29 +111,29 @@
 
     &__close-btn {
         display: none;
-        height: 32px;
-        width: 32px;
+        height: 16px;
+        width: 16px;
         justify-content: center;
         align-items: center;
+        margin-left: auto;
 
         .close-icon {
             position: relative;
-            height: 32px;
-            width: 32px;
+            height: 16px;
+            width: 16px;
             // display: block;
 
             &:before, &:after {
                 content: "";
                 height: 3px;
-                width: 30px;
+                width: 15px;
                 background-color: black;
                 position: absolute;
                 bottom: 50%;
             } 
 
             &:before {
-                transform: rotate(45deg); 
-                
+                transform: rotate(45deg);  
             }
 
             &:after {
@@ -141,6 +145,8 @@
     }
   
     &__navigation {
+        font-weight: 600;
+        font-size: 18px;
       margin-top: 50px;
       width: 100%;
       ul {
@@ -153,8 +159,6 @@
             display: block;
             padding: 15px 0;
             text-transform: capitalize;
-            font-weight: 600;
-            font-size: 18px;
   
             &:hover {
               color: $primary;
@@ -177,10 +181,23 @@
       }
   
       &-inner {
+        
         #mail {
           margin: 3px 0;
-          font-weight: 600;
-          font-size: 18px;
+
+          @include tablet {
+            font-weight: 600;
+          }
+
+          @include laptop-m {
+            font-weight: 600;
+            font-size: 18px; 
+          }
+
+        //   @include laptop-l {
+        //     font-weight: 600;
+        //     font-size: 18px;
+        //   }
         }
   
         #role {

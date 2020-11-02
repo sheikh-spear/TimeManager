@@ -100,6 +100,13 @@ export default {
 
 .dashboard {
   background-color: #d6e3ff;
-  grid-column: 2 / -1;
+
+  @include mobile {
+    grid-column: 2 / -1;
+  }
+
+  @include laptop-l {
+    grid-column: 4 / -1;
+  }
 }
 </style>
