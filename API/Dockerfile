@@ -1,17 +1,27 @@
-FROM elixir:1.9.1-slim
+FROM elixir:1.10.4
 
-# basic dependencies to make it all work
-RUN apt-get update -qq && apt-get -y --allow-unauthenticated install curl libpq-dev postgresql-client git make erlang-crypto apt-transport-https
+#Create a working directory
+WORKDIR /app
 
-# creating a user for the app
-ARG UID=1000
-RUN useradd -m -u $UID sheikh-spear
-USER sheikh-spear
+# Update package manager
+RUN apt-get update -y && apt upgrade -y && apt-get install -y \
+# Add dependencies for Node
+nodejs \
+# inotify-tools
+inotify-tools \
+# sudo
+sudo
 
-RUN mkdir /home/sheikh-spear/app
-WORKDIR /home/sheikh-spear/app
-RUN mkdir -p /home/sheikh-spear/app/deps; chown -R sheikh-spear:sheikh-spear /home/sheikh-spear/app/deps
-VOLUME ["/home/sheikh-spear/app/deps"]
-
+RUN ls
 RUN mix local.hex --force
+RUN mix archive.install hex phx_new 1.5.6 --force
+
+# Copy application in container
+COPY . .
+
 RUN mix local.rebar --force
+
+EXPOSE 4000
+
+# CMD ["bash", "entrypoint.sh"]
+# CMD ["mix", "deps.get"]

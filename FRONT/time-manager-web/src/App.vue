@@ -1,11 +1,15 @@
 <template>
   <div id="app">
-    <!-- We pass our user state across the component tree thanks to router-view
+
+    <!-- <Navbar /> -->
+    <div class="app-container">
+    <Sidebar />
+    <main class="dashboard">
+      <!-- We pass our user state across the component tree thanks to router-view
     component that acts as a placeholder for another children component
     We ensure that all components share the same user state -->
-    <Navbar />
-    <div class="container">
-    <router-view :user="user"></router-view>
+      <router-view :user="user"></router-view>
+    </main>
     </div>
 
   </div>
@@ -13,12 +17,13 @@
 
 <script>
 import axios from "axios";
-import Navbar from "./views/Navbar";
+// import Navbar from "./views/Navbar";
+import Sidebar from "./components/Sidebar";
 
 export default {
   name: "App",
   components: {
-    Navbar
+    Sidebar
   },
   data() {
     return {
@@ -38,11 +43,40 @@ export default {
 <style lang="scss">
 @import "./assets/style.scss";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./styles/index.scss";
+
 #app {
   @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
   font-family: "Noto Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.app-container {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: repeat(12, 1fr);
+
+  /* @include mobile {
+    grid-template-columns: minmax(80px, 10%) 1fr;
+  }
+
+  @include laptop-l {
+    grid-template-columns: minmax(150px, 25%) 1fr;
+  } */
+}
+
+.dashboard {
+  background-color: #d6e3ff;
+
+  @include mobile {
+    grid-column: 2 / -1;
+  }
+
+  @include laptop-l {
+    grid-column: 4 / -1;
+  }
 }
 </style>
