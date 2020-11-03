@@ -100,12 +100,15 @@ export default {
                     
                     this.barComponent = "horizontal-bar-chart"
                 }else{
-                    title = "Worktime of the "
-                    title += (worktimes[0].start.getDate()>10?"":"0")+worktimes[0].start.getDate()+"/"
-                    title += (worktimes[0].start.getMonth()>10?"":"0")+worktimes[0].start.getMonth()+"/"
-                    title += worktimes[0].start.getFullYear()
-                    
                     worktimes = worktimes.filter( (dt)=> dt.start.getDay() == this.date.getDay() && dt.start.getMonth() == this.date.getMonth() && dt.start.getFullYear() == this.date.getFullYear())
+                    
+                    title = "Worktime of the "
+                    title += (this.date.getDate()>10?"":"0")+this.date.getDate()+"/"
+                    title += (this.date.getMonth()>10?"":"0")+this.date.getMonth()+"/"
+                    title += this.date.getFullYear()
+
+                    console.log("title:",title,"worktimes:",worktimes)
+                    
                     worktimes.forEach( dt=>{
                         let hours = ( ( dt.end.getTime() -  dt.start.getTime() )/1000/60/60).toPrecision(3);
                         //Format to HH:mm
@@ -142,9 +145,9 @@ export default {
                         }]
                     }
                 }
-            }else{
-                console.error("WorkingtimeChart, worktimes shouln't by empty !")
             }
+
+            //To force the rerender
             this.renderKey++;
         }
     }

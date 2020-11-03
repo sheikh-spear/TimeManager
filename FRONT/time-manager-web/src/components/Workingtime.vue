@@ -4,11 +4,13 @@
             <toggle-button :value="mode=='weekly'"
                 :labels="{checked: 'Weekly', unchecked: 'Daily'}" :width="110" :height="35" :font-size="20"
                 :switch-color="{checked: 'linear-gradient(lightgray, white)', unchecked: 'linear-gradient(lightgray, white)'}"
-                @change="toggleMode"/>
-                <input type="date" value="2020-10-25" v-on:change="date = new Date($event.target.value)">
+            @change="toggleMode"/>
+        </div>
+        <div>
+            Date to check: <input type="date" value="2020-10-25" v-on:change="date = new Date($event.target.value)">
         </div>
 
-        <div class="small">
+        <div v-if="worktimes!=null" class="small">
             <worktime-chart :worktimes="worktimes" :date="date" :mode="mode"></worktime-chart>
         </div>
     </div>
@@ -26,7 +28,7 @@ export default {
             weeklyData: null,
             mode: "daily",
             date: new Date("2020-10-25"),
-            worktimes: []
+            worktimes: null
         }
     },
     props: {
@@ -35,7 +37,7 @@ export default {
     async mounted () {
         this.setDaily()
         this.getUserWorkingtime(this.userId).then( (result)=>{
-            console.log("result:", result)
+            this.worktimes = result
         }) 
     },
     components: {
@@ -74,9 +76,23 @@ export default {
             }
             this.mode = "weekly"
         },
-        getUserWorkingtime(userId){
-            return Axios.get(`/api/workingTime/${userId}`)
+        async getUserWorkingtime(userId){
+            return await new Promise( (resolve)=> Axios.get(`/api/workingtime/${userId}`).then( responce=>{
+                console.log("responce",responce)
+                let workingtimes = []
+                responce.data.data.forEach( dateString=>{
+                    workingtimes.push({ start: new Date(dateString.start), end: new Date(dateString.end)})
+                })
+                resolve(workingtimes);
+            }));
         }
     }
 }
 </script>
+
+<style lang="scss">
+#user-worktime {
+    margin: 20px auto;
+    text-align: center;
+}
+</style>

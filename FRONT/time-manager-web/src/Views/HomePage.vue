@@ -24,7 +24,7 @@ export default {
 <style lang="scss">
 .small {
   max-width: 600px;
-  margin:  150px auto;
+  margin:  20px auto;
 }
 .toggle__button {
     vertical-align: middle;
