@@ -135,7 +135,7 @@ export default {
             (this.date.getMonth() > 10 ? "" : "0") + this.date.getMonth() + "/";
           title += this.date.getFullYear();
 
-          console.log("title:", title, "worktimes:", worktimes);
+          // console.log("title:", title, "worktimes:", worktimes);
 
           worktimes.forEach(dt => {
             let hours = (

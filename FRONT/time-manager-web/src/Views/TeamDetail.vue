@@ -50,27 +50,27 @@ export default {
   data() {
     return {
       teamName: "Name of the team",
-      managerName: "Name of the the Manager",
+      managerName: "Name of the the Manager"
       // users: []
     };
   },
   methods: {
-    getUser: function () {
+    getUser: function() {
       axios.get("/api/users/list").then(
-        (response) => {
+        response => {
           this.users = response.data.data.users;
         },
-        (error) => {
-          console.log(error.response.data.errors.detail);
-          console.log(this);
+        error => {
+          // console.log(error.response.data.errors.detail);
+          // console.log(this);
           this.errorMessage = error.response.data.errors.detail;
         }
       );
-    },
+    }
   },
-  created: function () {
+  created: function() {
     this.getUser();
-  },
+  }
 };
 </script>
 

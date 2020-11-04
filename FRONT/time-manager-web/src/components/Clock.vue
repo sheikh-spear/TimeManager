@@ -4,23 +4,42 @@
         <p class="clock__date">Lundi 3 novembre</p>
         <p class="clock__time">14:15</p>
         <div class="button-group">
-            <button v-on:click="startClock" class="btn btn-default">Arrivée</button>
-            <button v-on:click="stopClock" class="btn btn-primary">Départ</button>
+            <button v-on:click="startClock" class="btn btn-default" :disabled="user.status">Arrivée</button>
+            <button v-on:click="stopClock" class="btn btn-primary" :disabled="!user.status">Départ</button>
         </div>
     </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      user: { status: false }
+    };
+  },
+  created() {
+    this.getUserData();
   },
   methods: {
+    getUserData: function() {
+      console.log(this.user);
+      axios.get("/api/users/profile").then(response => {
+        this.user = response.data;
+        // console.log(response.data);
+      });
+    },
     startClock: () => {
       console.log("start clock");
+      axios.get("/api/users/punch_clock").then(response => {
+        console.log(response.data);
+      });
     },
     stopClock: () => {
       console.log("stop clock");
+      axios.get("/api/users/punch_clock").then(response => {
+        console.log(response.data);
+      });
     }
   }
 };

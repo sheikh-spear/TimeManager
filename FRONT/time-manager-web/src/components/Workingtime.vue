@@ -81,7 +81,7 @@ export default {
     async getUserWorkingtime(userId) {
       return await new Promise(resolve =>
         Axios.get(`/api/workingtime/${userId}`).then(response => {
-          console.log("response", response);
+          //   console.log("response", response);
           let workingtimes = [];
           response.data.data.forEach(dateString => {
             workingtimes.push({

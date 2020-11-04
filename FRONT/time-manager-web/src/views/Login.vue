@@ -23,14 +23,12 @@ export default {
       //Send request to API to get the user web token
       axios.post("/api/users/sign_in").then(
         response => {
-          console.log(response.data);
           //If success, redirect to /
+          console.log(response);
           this.$router.push("/");
         },
         error => {
           //If error
-          console.log(error.response.data.errors.detail);
-          console.log(this);
           this.errorMessage = error.response.data.errors.detail;
         }
       );
