@@ -69,8 +69,6 @@ export default {
 }
 
 .dashboard {
-  background-color: #d6e3ff;
-
   @include mobile {
     grid-column: 2 / -1;
   }
