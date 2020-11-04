@@ -20,10 +20,10 @@
           </div>
         <nav class="sidebar__navigation">
           <ul>
-            <li><a href="#">dashboard</a></li>
-            <li><a href="#">profile</a></li>
-            <li><a href="#">employees</a></li>
-            <li><a href="#">teams</a></li>
+            <li><router-link to="/">dashboard</router-link></li>
+            <li><router-link to="/profile">profile</router-link></li>
+            <li><router-link to="/users">employees</router-link></li>
+            <li><router-link to="/teams">teams</router-link></li>
           </ul>
           
         </nav>
