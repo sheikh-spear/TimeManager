@@ -19,6 +19,8 @@ defmodule TimeManagerWeb.UserView do
       email: user.email,
       is_manager: user.is_manager,
       is_general_manager: user.is_general_manager,
+      start: user.start,
+      status: user.status
     }
   end
 
@@ -26,10 +28,11 @@ defmodule TimeManagerWeb.UserView do
 		%{
 			data: %{
 				user: %{
-					id: user.id,
 					email: user.email,
           is_manager: user.is_manager,
-          is_general_manager: user.is_general_manager
+          is_general_manager: user.is_general_manager,
+          start: user.start,
+          status: user.status
 				}
 			}
 		}

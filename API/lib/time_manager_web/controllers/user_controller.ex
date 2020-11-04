@@ -129,6 +129,10 @@ defmodule TimeManagerWeb.UserController do
     render(conn, "show.json", user: query);
   end
 
+  def profile(conn, params) do
+    id = conn.private.plug_session["current_user_id"]
+    render(conn, "show.json", user: Account.get_user!(id))
+  end
   def delete_account(conn, params) do
     delete(conn, conn.private.plug_session["current_user_id"])
   end

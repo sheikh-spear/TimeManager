@@ -32,6 +32,7 @@ defmodule TimeManagerWeb.Router do
     post "/manager/remove_user_from_team", UserController, :remove_user_from_team
     get  "/manager/list_users_from_team", UserController, :list_users_from_team
     post "/manager/get_team_member_working_time", UserController, :get_team_member_working_time
+    get "/manager/list_users", UserController, :index
   end
 
   scope "/api", TimeManagerWeb do
@@ -44,6 +45,7 @@ defmodule TimeManagerWeb.Router do
 	scope "/api", TimeManagerWeb do
     pipe_through [:api, :api_auth]
     get "/users/punch_clock", UserController, :punch_clock
+    get "/users/profile", UserController, :profile
     get "/users/working_times", UserController, :get_working_time
     post "/users/delete_account", UserController, :delete_account
     resources "/users", UserController, except: [:new, :edit]
