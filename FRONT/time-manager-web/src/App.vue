@@ -46,8 +46,8 @@ export default {
 @import "./styles/index.scss";
 
 #app {
-  @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
-  font-family: "Noto Sans", sans-serif;
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
