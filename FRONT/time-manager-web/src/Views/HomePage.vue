@@ -17,7 +17,7 @@
       <div class="grid-container">
           <div class="grid-item clock-container">
               <div class="content">
-
+                  <Clock />
               </div>
           </div>
           <div class="grid-item user-worktime-container">
@@ -34,6 +34,7 @@
 
 <script>
 import UserWorktime from "../components/Workingtime";
+import Clock from "../components/Clock.vue";
 
 export default {
   name: "HomePage",
@@ -43,7 +44,8 @@ export default {
     };
   },
   components: {
-    UserWorktime
+    UserWorktime,
+    Clock
   }
 };
 </script>
