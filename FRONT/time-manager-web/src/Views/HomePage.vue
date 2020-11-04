@@ -1,6 +1,6 @@
 <template>
   <div class="home" id="Home">
-      <div class="grid-ruler">
+      <!-- <div class="grid-ruler">
           <div class="grid-ruler__item"></div>
           <div class="grid-ruler__item"></div>
           <div class="grid-ruler__item"></div>
@@ -13,7 +13,7 @@
           <div class="grid-ruler__item"></div>
           <div class="grid-ruler__item"></div>
           <div class="grid-ruler__item"></div>
-      </div>
+      </div> -->
       <div class="grid-container">
           <div class="grid-item clock-container">
               <div class="content">
@@ -75,7 +75,7 @@ export default {
 .content {
   padding: 16px;
   border-radius: 4px;
-  background-color: #47b0b0;
+  background-color: rgb(63 81 181 / 40%);
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
 

@@ -4,14 +4,26 @@
         <p class="clock__date">Lundi 3 novembre</p>
         <p class="clock__time">14:15</p>
         <div class="button-group">
-            <button class="btn btn-default">Arrivée</button>
-            <button class="btn btn-primary">Départ</button>
+            <button v-on:click="startClock" class="btn btn-default">Arrivée</button>
+            <button v-on:click="stopClock" class="btn btn-primary">Départ</button>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    startClock: () => {
+      console.log("start clock");
+    },
+    stopClock: () => {
+      console.log("stop clock");
+    }
+  }
+};
 </script>
 
 <style lang="scss">
