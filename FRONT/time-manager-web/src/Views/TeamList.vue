@@ -31,27 +31,27 @@ export default {
   name: "TeamList",
   data() {
     return {
-      teams: [],
+      teams: []
     };
   },
   methods: {
-    getTeam: function () {
+    getTeam: function() {
       axios.get("/api/teams/list").then(
-        (response) => {
+        response => {
           this.teams = response.data.teams;
         },
-        (error) => {
+        error => {
           console.log(error.response.data.errors.detail);
         }
       );
     },
     teamDetail: function(id) {
-      this.$router.push({ path: 'team/' + id })
+      this.$router.push({ path: "team/" + id });
     }
   },
-  created: function () {
+  created: function() {
     this.getTeam();
-  },
+  }
 };
 </script>
 

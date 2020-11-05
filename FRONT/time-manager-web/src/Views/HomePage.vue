@@ -1,75 +1,131 @@
 <template>
-  <div id="Home">
-      <user-worktime :userId="userId"></user-worktime>
+  <div class="home" id="Home">
+      <!-- <div class="grid-ruler">
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+          <div class="grid-ruler__item"></div>
+      </div> -->
+      <div class="grid-container">
+          <div class="grid-item clock-container">
+              <div class="content">
+                  <Clock />
+              </div>
+          </div>
+          <div class="grid-item user-worktime-container">
+              <div class="content">
+                  <user-worktime :userId="userId"></user-worktime>
+              </div>
+              <!-- <user-worktime :userId="userId"></user-worktime> -->
+          </div>
+
+      </div>
   </div>
 </template>
 
 
 <script>
-import UserWorktime from '../components/Workingtime'
+import UserWorktime from "../components/Workingtime";
+import Clock from "../components/Clock.vue";
 
 export default {
   name: "HomePage",
-  data () {
+  data() {
     return {
       userId: "b6d4-r4bf..."
-    }
+    };
   },
   components: {
-    UserWorktime
-  },
+    UserWorktime,
+    Clock
+  }
 };
 </script>
 
 <style lang="scss">
-.small {
-  max-width: 600px;
-  margin:  20px auto;
-}
-.toggle__button {
-    vertical-align: middle;
-    user-select: none;
-    cursor: pointer;
-}
-.toggle__button input[type="checkbox"] {
-    opacity: 0;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-}
-.toggle__button .toggle__switch {
-    display:inline-block;
-    height:12px;
-    border-radius:6px;
-    width:40px;
-    background: #BFCBD9;
-    box-shadow: inset 0 0 1px #BFCBD9;
-    position:relative;
-    margin-left: 10px;
-    transition: all .25s;
+@import "../styles/index.scss";
+
+.home {
+  padding: 16px;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
 }
 
-.toggle__button .toggle__switch::after, 
-.toggle__button .toggle__switch::before {
-    content: "";
-    position: absolute;
-    display: block;
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    left: 0;
-    top: -3px;
-    transform: translateX(0);
-    transition: all .25s cubic-bezier(.5, -.6, .5, 1.6);
+.grid-container {
+  display: flex;
+  margin: -8px;
 }
 
-.toggle__button .toggle__switch::after {
-    background: #4D4D4D;
-    box-shadow: 0 0 1px #666;
+.grid-item {
+  padding: 8px;
+  /* flex-grow: 1; */
+  flex-shrink: 1;
+  flex-grow: 0;
 }
-.toggle__button .toggle__switch::before {
-    background: #4D4D4D;
-    box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
-    opacity:0;
+
+.content {
+  padding: 16px;
+  border-radius: 4px;
+  background-color: rgb(63 81 181 / 40%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.user-worktime-container {
+  @include tablet {
+    flex-basis: calc((100% / 3) * 2);
+  }
+  @include laptop-s {
+    flex-basis: 50%;
+  }
+  @include laptop-m {
+    /* flex-basis: calc(100% / 3); */
+    flex-basis: 50%;
+  }
+  @include laptop-l {
+    flex-basis: 50%;
+  }
+}
+
+.clock-container {
+  @include tablet {
+    flex-basis: calc(100% / 3);
+  }
+  @include laptop-s {
+    flex-basis: 50%;
+  }
+  @include laptop-m {
+    /* flex-basis: calc(100% / 3); */
+    flex-basis: 50%;
+  }
+  @include laptop-l {
+    flex-basis: 50%;
+  }
+}
+
+.grid-ruler {
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(12, 1fr);
+  /* box-sizing: border-box; */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 16px;
+  width: 100%;
+  height: 100vh;
+
+  &__item {
+    background-color: rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+  }
 }
 </style>
