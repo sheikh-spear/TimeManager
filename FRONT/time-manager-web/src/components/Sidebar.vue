@@ -40,6 +40,7 @@ export default {
     logout: function() {
       logoutUser();
       console.log("logout");
+      this.$router.push("/login");
     }
   }
 };
