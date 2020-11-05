@@ -45,7 +45,7 @@ export function logoutUser() {
 
 export function isLoggedIn() {
     const isAuthenticated = localStorage.getItem("is-authenticated");
-    return isAuthenticated;
+    return !!isAuthenticated;
 }
 
 export function setAuthenticated() {
