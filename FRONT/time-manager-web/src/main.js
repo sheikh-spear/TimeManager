@@ -8,6 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Login from './views/Login.vue'
 import HomePage from './views/HomePage'
 import Profile from './views/Profile.vue'
+import Employees from './views/Employees.vue'
 import UserList from './views/UserList'
 import TeamList from './views/TeamList'
 import TeamDetail from './views/TeamDetail'
@@ -35,6 +36,11 @@ const routes = [
     }
   },
   { path: '/profile', component: Profile },
+  {
+    path: '/employees', component: Employees, meta: {
+      allowManager: true
+    }
+  },
   {
     path: '/teams', component: TeamList, meta: {
       allowManager: true
