@@ -16,22 +16,19 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+
+import { loginUser } from "../utils/auth.js";
+
 export default {
   methods: {
     getAuthenticatedToken: function() {
-      //Send request to API to get the user web token
-      axios.post("/api/users/sign_in").then(
-        response => {
-          //If success, redirect to /
-          console.log(response);
-          this.$router.push("/");
-        },
-        error => {
-          //If error
-          this.errorMessage = error.response.data.errors.detail;
-        }
-      );
+      //
+      loginUser(this.email, this.password).then(() => {
+        //Redirect to the home page and the dashboard
+        console.log("logged");
+        this.$router.push("/");
+      });
     }
   },
   data() {

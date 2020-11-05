@@ -27,14 +27,23 @@
           </ul>
           
         </nav>
-        <button class="sidebar__button">logout</button>
+        <button class="sidebar__button" v-on:click="logout">logout</button>
         </div>
       </header>
     
 </template>
 
 <script>
-export default {};
+import { logoutUser } from "../utils/auth.js";
+export default {
+  methods: {
+    logout: function() {
+      logoutUser();
+      console.log("logout");
+      this.$router.push("/login");
+    }
+  }
+};
 </script>
 
 <style lang="scss">
