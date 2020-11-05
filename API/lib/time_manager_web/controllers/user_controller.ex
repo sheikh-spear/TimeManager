@@ -22,6 +22,10 @@ defmodule TimeManagerWeb.UserController do
     end
   end
 
+  def profile(conn, params) do
+    render(conn, "show.json", user: Account.get_user!(conn.private.plug_session["current_user_id"]))
+  end
+  
   def show(conn, %{"id" => id}) do
     user = Account.get_user!(id)
     render(conn, "show.json", user: user)
