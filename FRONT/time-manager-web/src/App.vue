@@ -3,7 +3,7 @@
 
     <!-- <Navbar /> -->
     <div class="app-container">
-    <Sidebar />
+    <Sidebar :isLoggedIn="isLoggedIn" />
     <main class="dashboard">
       <!-- We pass our user state across the component tree thanks to router-view
     component that acts as a placeholder for another children component
@@ -19,6 +19,10 @@
 import axios from "axios";
 // import Navbar from "./views/Navbar";
 import Sidebar from "./components/Sidebar";
+import { isLoggedIn } from "./utils/auth.js";
+
+// axios.defaults.baseURL =
+//         'https://europe-west1-my-tcc-project-66a43.cloudfunctions.net/api';
 
 export default {
   name: "App",
@@ -27,8 +31,13 @@ export default {
   },
   data() {
     return {
-      user: null
+      user: null,
+      isLoggedIn: null
     };
+  },
+  updated() {
+    this.isLoggedIn = isLoggedIn();
+    console.log(this.isLoggedIn);
   },
   created() {
     // => Asnyc API call here <=
