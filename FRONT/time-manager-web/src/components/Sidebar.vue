@@ -27,14 +27,21 @@
           </ul>
           
         </nav>
-        <button class="sidebar__button">logout</button>
+        <button class="sidebar__button" v-on:click="logout">logout</button>
         </div>
       </header>
     
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    logout: function() {
+      localStorage.removeItem("is-authenticated");
+      console.log("logout");
+    }
+  }
+};
 </script>
 
 <style lang="scss">
