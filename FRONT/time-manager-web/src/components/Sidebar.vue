@@ -14,7 +14,7 @@
           <div class="sidebar__details">
             <img src="https://via.placeholder.com/60x60" alt="">
             <div class="sidebar__details-inner">
-              <p id="mail">{{user.email}}</p>
+              <p id="mail" v-if="user">{{user.email}}</p>
               <p id="role" v-if="user.is_general_manager">general manager</p>
               <p id="role" v-if="!user.is_general_manager && user.is_manager">manager</p>
               <p id="role" v-if="!user.is_general_manager && !user.is_manager">user</p>

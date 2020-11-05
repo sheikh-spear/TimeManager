@@ -3,12 +3,12 @@
 
     <!-- <Navbar /> -->
     <div class="app-container">
-    <Sidebar :user="user" :isLoggedIn="isLoggedIn" />
+    <Sidebar v-if="loading" :user="user" :isLoggedIn="isLoggedIn" />
     <main class="dashboard">
       <!-- We pass our user state across the component tree thanks to router-view
     component that acts as a placeholder for another children component
     We ensure that all components share the same user state -->
-      <router-view :user="user"></router-view>
+      <router-view v-if="loading" :user="user"></router-view>
     </main>
     </div>
 
@@ -29,7 +29,8 @@ export default {
   data() {
     return {
       user: null,
-      isLoggedIn: null
+      isLoggedIn: null,
+      loading: false
     };
   },
   methods: {
@@ -48,6 +49,7 @@ export default {
       axios(config)
         .then(response => {
           this.user = response.data.data;
+          this.loading = true;
         })
         .catch(error => {
           console.log(error);
