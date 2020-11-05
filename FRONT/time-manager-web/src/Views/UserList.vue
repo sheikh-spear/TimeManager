@@ -34,29 +34,29 @@ export default {
   name: "UserList",
   data() {
     return {
-      users: [],
+      users: []
     };
   },
   methods: {
-    getUser: function () {
+    getUser: function() {
       axios.get("/api/users/list").then(
-        (response) => {
+        response => {
           this.users = response.data.data.users;
         },
-        (error) => {
-          console.log(error.response.data.errors.detail);
-          console.log(this);
+        error => {
+          // console.log(error.response.data.errors.detail);
+          // console.log(this);
           this.errorMessage = error.response.data.errors.detail;
         }
       );
     },
-    goToUserPage(userId){
-      this.$router.push({ path: `/users/${userId}` })
+    goToUserPage(userId) {
+      this.$router.push({ path: `/users/${userId}` });
     }
   },
-  created: function () {
+  created: function() {
     this.getUser();
-  },
+  }
 };
 </script>
 

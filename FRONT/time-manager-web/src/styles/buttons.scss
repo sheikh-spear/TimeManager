@@ -10,6 +10,7 @@
     padding: 10px 20px;
     border: none;
     cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
     &-primary {
         background: #2f80ed;
@@ -17,9 +18,8 @@
     }
 
     &-default {
-        background: transparent;
-        color: $dark-grey;
-        border: 1px solid $dark-grey;
+        background: #fff;
+        color: #2f80ed;
     }
 
     &-inline {

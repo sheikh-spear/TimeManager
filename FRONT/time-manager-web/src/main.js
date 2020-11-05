@@ -11,7 +11,7 @@ import TeamList from './views/TeamList'
 import TeamDetail from './views/TeamDetail'
 import UserDashboard from './views/UserDashboard'
 import ToggleButton from 'vue-js-toggle-button'
- 
+
 Vue.use(ToggleButton)
 Vue.use(BootstrapVue)
 //Vue Router Config
@@ -36,7 +36,6 @@ Vue.config.productionTip = false
 
 // //Mock API DATA in developement mode
 if (process.env.NODE_ENV === 'development') {
-  console.log("dev");
   const { worker } = require('./mocks/browser')
   worker.start()
 }
