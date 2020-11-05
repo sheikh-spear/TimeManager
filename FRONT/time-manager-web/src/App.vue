@@ -3,12 +3,12 @@
 
     <!-- <Navbar /> -->
     <div class="app-container">
-    <Sidebar />
+    <Sidebar v-if="loading" :user="user" :isLoggedIn="isLoggedIn" />
     <main class="dashboard">
       <!-- We pass our user state across the component tree thanks to router-view
     component that acts as a placeholder for another children component
     We ensure that all components share the same user state -->
-      <router-view :user="user"></router-view>
+      <router-view v-if="loading" :user="user"></router-view>
     </main>
     </div>
 
@@ -19,6 +19,7 @@
 import axios from "axios";
 // import Navbar from "./views/Navbar";
 import Sidebar from "./components/Sidebar";
+import { isLoggedIn } from "./utils/auth.js";
 
 export default {
   name: "App",
@@ -27,15 +28,45 @@ export default {
   },
   data() {
     return {
-      user: null
+      user: null,
+      isLoggedIn: null,
+      loading: false
     };
   },
-  created() {
+  methods: {
+    getUserData: function() {
+      console.log("get user");
+      // console.log(document.cookie);
+      var config = {
+        method: "get",
+        url: `users/profile`,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "Content-Type": "application/json"
+        }
+      };
+
+      axios(config)
+        .then(response => {
+          this.user = response.data.data;
+          this.loading = true;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
+  updated() {
+    this.isLoggedIn = isLoggedIn();
+  },
+  created: function() {
+    this.getUserData();
     // => Asnyc API call here <=
-    axios.get("/api/users").then(response => {
-      //get the user and store it to the local state of our App parent component
-      this.user = response.data;
-    });
+    // axios.get("users/profile").then(response => {
+    //   //get the user and store it to the local state of our App parent component
+    //   this.user = response.data;
+    //   console.log(response.data);
+    // });
   }
 };
 </script>

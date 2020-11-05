@@ -8,7 +8,7 @@
           <div class="profile__details">
             <div class="profile__details-group">
               <span class="profile__details-label">email</span>
-              <p class="profile__details-text">email@test.com</p>
+              <p v-if="user" class="profile__details-text">{{user.email}}</p>
             </div>
             <div class="profile__details-group">
               <span class="profile__details-label">id</span>
@@ -16,21 +16,28 @@
             </div>
              <div class="profile__details-group">
               <span class="profile__details-label">role</span>
-              <p class="profile__details-text"> <span id="role">manager</span></p>
+              <p class="profile__details-text" v-if="user.is_general_manager"> <span id="role">general manager</span></p>
+              <p class="profile__details-text" v-if="!user.is_general_manager && user.is_manager"> <span id="role">manager</span></p>
+              <p class="profile__details-text" v-if="!user.is_general_manager && !user.is_manager"> <span id="role">user</span></p>
             </div>
           </div>
 
-          <button class="btn btn-default">Logout</button>
+          <button v-on:click="logout" class="btn btn-primary">Logout</button>
         </div>
     
     </div>
 </template>
 
 <script>
+import { logoutUser } from "../utils/auth.js";
 export default {
   name: "Profile",
+  props: ["user"],
   methods: {
-    getUserAvatar: function() {}
+    logout: function() {
+      logoutUser();
+      this.$router.push("/login");
+    }
   },
   data() {
     return {
@@ -45,14 +52,14 @@ export default {
 
 .profile {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
   &__card {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 8px;
     padding: 50px;
