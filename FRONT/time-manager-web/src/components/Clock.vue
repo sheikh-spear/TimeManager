@@ -21,6 +21,7 @@ export default {
   created() {
     this.getUserData();
   },
+  computed: {},
   methods: {
     getUserData: function() {
       console.log(this.user);
