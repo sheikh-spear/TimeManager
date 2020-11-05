@@ -23,8 +23,8 @@ export function loginUser(email, password) {
 
             axios(config)
                 .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                    console.log(response.headers['set-cookie']);
+                    setManager(response.data.data.user.is_manager);
+
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -42,6 +42,7 @@ export function loginUser(email, password) {
 
 export function logoutUser() {
     localStorage.removeItem("is-authenticated");
+    localStorage.removeItem("is-manager");
 }
 
 export function isLoggedIn() {
@@ -49,6 +50,14 @@ export function isLoggedIn() {
     return !!isAuthenticated;
 }
 
+export function isManager() {
+    return !!localStorage.getItem("is-manager");
+}
+
 export function setAuthenticated() {
     localStorage.setItem("is-authenticated", true);
+}
+
+export function setManager(boolean) {
+    localStorage.setItem("is-manager", boolean);
 }

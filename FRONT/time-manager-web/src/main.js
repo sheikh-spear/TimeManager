@@ -35,7 +35,11 @@ const routes = [
     }
   },
   { path: '/profile', component: Profile },
-  { path: '/teams', component: TeamList },
+  {
+    path: '/teams', component: TeamList, meta: {
+      allowManager: true
+    }
+  },
   { path: '/users', component: UserList },
   { path: '/users/:id', component: UserDashboard },
   { path: '/team/:id', component: TeamDetail }
@@ -48,6 +52,15 @@ const router = new VueRouter({
 
 //Perform checks on all route changes before they occur
 router.beforeEach((to, from, next) => {
+
+
+  //If the page can't be accessed by non-manager and the user isn't a manager...
+  // if (!to.meta.allowManager && !isManager()) {
+  //   //..then redirect him to the home page
+  //   next({
+  //     path: '/'
+  //   })
+  // }
   //If the page can't be accessed anonymously and the user isn't logged,..
   if (!to.meta.allowAnonymous && !isLoggedIn()) {
     //...then redirect the user to the login page 
