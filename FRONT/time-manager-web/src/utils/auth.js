@@ -1,15 +1,5 @@
 import axios from 'axios'
 
-let API_URL;
-
-if (process.env.NODE_ENV === 'development') {
-    API_URL = '/';
-} else {
-    API_URL = 'https://yamikamisama.fr/';
-}
-
-console.log(API_URL);
-
 export function loginUser(email, password) {
 
     var data = JSON.stringify({
@@ -19,15 +9,13 @@ export function loginUser(email, password) {
 
     var config = {
         method: "post",
-        url: `${API_URL}api/users/sign_in`,
+        url: `users/sign_in`,
         headers: {
             "X-Requested-With": "XMLHttpRequest",
             "Content-Type": "application/json"
         },
         data: data
     };
-
-    console.log(config);
 
     return new Promise((resolve, reject) => {
 

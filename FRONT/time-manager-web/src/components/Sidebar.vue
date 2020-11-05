@@ -34,10 +34,11 @@
 </template>
 
 <script>
+import { logoutUser } from "../utils/auth.js";
 export default {
   methods: {
     logout: function() {
-      localStorage.removeItem("is-authenticated");
+      logoutUser();
       console.log("logout");
     }
   }

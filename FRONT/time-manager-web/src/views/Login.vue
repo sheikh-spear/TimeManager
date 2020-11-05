@@ -23,7 +23,12 @@ import { loginUser } from "../utils/auth.js";
 export default {
   methods: {
     getAuthenticatedToken: function() {
-      loginUser();
+      //
+      loginUser(this.email, this.password).then(() => {
+        //Redirect to the home page and the dashboard
+        console.log("logged");
+        this.$router.push("/");
+      });
       //Récupérer mail et password
       // var data = JSON.stringify({
       //   email: this.email,
