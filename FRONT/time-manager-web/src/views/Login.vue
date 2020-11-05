@@ -16,22 +16,51 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+
+import { loginUser } from "../utils/auth.js";
+
 export default {
   methods: {
     getAuthenticatedToken: function() {
-      //Send request to API to get the user web token
-      axios.post("/api/users/sign_in").then(
-        response => {
-          //If success, redirect to /
-          console.log(response);
-          this.$router.push("/");
-        },
-        error => {
-          //If error
-          this.errorMessage = error.response.data.errors.detail;
-        }
-      );
+      loginUser();
+      //Récupérer mail et password
+      // var data = JSON.stringify({
+      //   email: this.email,
+      //   password: this.password
+      // });
+
+      // console.log(data);
+
+      // var config = {
+      //   method: "post",
+      //   url: "http://yamikamisama.fr:4000/api/users/sign_in",
+      //   headers: {
+      //     "X-Requested-With": "XMLHttpRequest",
+      //     "Content-Type": "application/json"
+      //   },
+      //   data: data
+      // };
+
+      // axios(config)
+      //   .then(function(response) {
+      //     console.log(JSON.stringify(response.data));
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //   });
+
+      // axios.post("http://yamikamisama.fr:4000/api/users/sign_in").then(
+      //   response => {
+      //     //If success, redirect to /
+      //     console.log(response);
+      //     this.$router.push("/");
+      //   },
+      //   error => {
+      //     //If error
+      //     this.errorMessage = error.response.data.errors.detail;
+      //   }
+      // );
     }
   },
   data() {

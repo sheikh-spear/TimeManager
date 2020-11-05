@@ -34,7 +34,7 @@ const router = new VueRouter({
 
 Vue.config.productionTip = false
 
-// //Mock API DATA in developement mode
+//Mock API DATA in developement mode
 if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser')
   worker.start()
