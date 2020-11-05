@@ -3,7 +3,7 @@
 
     <!-- <Navbar /> -->
     <div class="app-container">
-    <Sidebar :isLoggedIn="isLoggedIn" />
+    <Sidebar :user="user" :isLoggedIn="isLoggedIn" />
     <main class="dashboard">
       <!-- We pass our user state across the component tree thanks to router-view
     component that acts as a placeholder for another children component
@@ -21,9 +21,6 @@ import axios from "axios";
 import Sidebar from "./components/Sidebar";
 import { isLoggedIn } from "./utils/auth.js";
 
-// axios.defaults.baseURL =
-//         'https://europe-west1-my-tcc-project-66a43.cloudfunctions.net/api';
-
 export default {
   name: "App",
   components: {
@@ -35,16 +32,39 @@ export default {
       isLoggedIn: null
     };
   },
+  methods: {
+    getUserData: function() {
+      console.log("get user");
+      // console.log(document.cookie);
+      var config = {
+        method: "get",
+        url: `users/profile`,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "Content-Type": "application/json"
+        }
+      };
+
+      axios(config)
+        .then(response => {
+          this.user = response.data.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
   updated() {
     this.isLoggedIn = isLoggedIn();
-    console.log(this.isLoggedIn);
   },
-  created() {
+  created: function() {
+    this.getUserData();
     // => Asnyc API call here <=
-    axios.get("/api/users").then(response => {
-      //get the user and store it to the local state of our App parent component
-      this.user = response.data;
-    });
+    // axios.get("users/profile").then(response => {
+    //   //get the user and store it to the local state of our App parent component
+    //   this.user = response.data;
+    //   console.log(response.data);
+    // });
   }
 };
 </script>

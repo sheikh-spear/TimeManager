@@ -64,10 +64,10 @@ router.beforeEach((to, from, next) => {
 Vue.config.productionTip = false
 
 //Mock API DATA in developement mode
-if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser')
-  worker.start()
-}
+// if (process.env.NODE_ENV === 'development') {
+//   const { worker } = require('./mocks/browser')
+//   worker.start()
+// }
 
 new Vue({
   router,

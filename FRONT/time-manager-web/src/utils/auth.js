@@ -24,6 +24,7 @@ export function loginUser(email, password) {
             axios(config)
                 .then(function (response) {
                     console.log(JSON.stringify(response.data));
+                    console.log(response.headers['set-cookie']);
                 })
                 .catch(function (error) {
                     console.log(error);

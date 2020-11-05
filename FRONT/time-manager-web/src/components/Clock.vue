@@ -24,11 +24,12 @@ export default {
   computed: {},
   methods: {
     getUserData: function() {
-      console.log(this.user);
-      axios.get("/api/users/profile").then(response => {
-        this.user = response.data;
-        // console.log(response.data);
-      });
+      // console.log(this.user);
+      // axios.get("/api/users/profile").then(response => {
+      //   this.user = response.data;
+      //   // console.log(response.data);
+      //   // console.log(response.data);
+      // });
     },
     startClock: () => {
       console.log("start clock");

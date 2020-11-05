@@ -14,8 +14,10 @@
           <div class="sidebar__details">
             <img src="https://via.placeholder.com/60x60" alt="">
             <div class="sidebar__details-inner">
-              <p id="mail">email@email.com</p>
-              <p id="role">general manager</p>
+              <p id="mail">{{user.email}}</p>
+              <p id="role" v-if="user.is_general_manager">general manager</p>
+              <p id="role" v-if="!user.is_general_manager && user.is_manager">manager</p>
+              <p id="role" v-if="!user.is_general_manager && !user.is_manager">user</p>
             </div>
           </div>
         <nav class="sidebar__navigation">
@@ -40,7 +42,12 @@
 <script>
 import { logoutUser } from "../utils/auth.js";
 export default {
-  props: ["isLoggedIn"],
+  props: ["isLoggedIn", "user"],
+  data() {
+    return {
+      mail: "mail"
+    };
+  },
   methods: {
     logout: function() {
       logoutUser();

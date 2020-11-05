@@ -22,7 +22,7 @@
           </div>
           <div class="grid-item user-worktime-container">
               <div class="content">
-                  <user-worktime :userId="userId"></user-worktime>
+                  <!-- <user-worktime :userId="userId"></user-worktime> -->
               </div>
               <!-- <user-worktime :userId="userId"></user-worktime> -->
           </div>
@@ -33,7 +33,7 @@
 
 
 <script>
-import UserWorktime from "../components/Workingtime";
+// import UserWorktime from "../components/Workingtime";
 import Clock from "../components/Clock.vue";
 
 export default {
@@ -44,7 +44,7 @@ export default {
     };
   },
   components: {
-    UserWorktime,
+    // UserWorktime,
     Clock
   }
 };
