@@ -8,8 +8,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Login from './views/Login.vue'
 import HomePage from './views/HomePage'
 import Profile from './views/Profile.vue'
+import Employees from './views/Employees.vue'
+import Team from './views/Team.vue'
 import UserList from './views/UserList'
-import TeamList from './views/TeamList'
 import TeamDetail from './views/TeamDetail'
 import UserDashboard from './views/UserDashboard'
 import ToggleButton from 'vue-js-toggle-button'
@@ -36,7 +37,12 @@ const routes = [
   },
   { path: '/profile', component: Profile },
   {
-    path: '/teams', component: TeamList, meta: {
+    path: '/employees', component: Employees, meta: {
+      allowManager: true
+    }
+  },
+  {
+    path: '/team', component: Team, meta: {
       allowManager: true
     }
   },
