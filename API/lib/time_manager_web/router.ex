@@ -25,6 +25,7 @@ defmodule TimeManagerWeb.Router do
     post "/general_manager/promote", UserController, :promote
     post "/general_manager/demote", UserController, :demote
     post "/general_manager/get_user_working_time", UserController, :get_user_working_time
+    post "/general_manager/find_user_with_email", UserController, :find_user_with_email
   end
 
   scope "/api", TimeManagerWeb do
@@ -39,7 +40,6 @@ defmodule TimeManagerWeb.Router do
   scope "/api", TimeManagerWeb do
     pipe_through :api
     post "/users/sign_in", UserController, :sign_in
-    post "/users/find_user_with_email", UserController, :find_user_with_email
     post "/users/register", UserController, :create
     get "/users/profile", UserController, :profile
   end
