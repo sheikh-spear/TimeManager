@@ -6,13 +6,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 //Component 
 import Login from './views/Login.vue'
-import HomePage from './Views/HomePage'
+import HomePage from './views/HomePage'
 import Profile from './views/Profile.vue'
-import Employees from './Views/Employees.vue'
-import Team from './Views/Team.vue'
-import UserList from './Views/UserList'
-import TeamDetail from './Views/TeamDetail'
-import UserDashboard from './Views/UserDashboard'
+import Employees from './views/Employees.vue'
+import Team from './views/Team.vue'
+import UserList from './views/UserList'
+import TeamDetail from './views/TeamDetail'
+import UserDashboard from './views/UserDashboard'
 import ToggleButton from 'vue-js-toggle-button'
 
 //utils
