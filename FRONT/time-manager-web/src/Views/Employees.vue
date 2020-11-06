@@ -110,6 +110,8 @@ export default {
       axios(config)
         .then(response => {
           console.log(response);
+          this.getUsersList();
+          this.getTeamList();
         })
         .catch(function(error) {
           console.log(error);

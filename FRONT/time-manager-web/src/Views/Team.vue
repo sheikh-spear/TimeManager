@@ -72,6 +72,7 @@ export default {
       axios(config)
         .then(response => {
           console.log(response);
+          this.getUsersList();
         })
         .catch(function(error) {
           console.log(error);
