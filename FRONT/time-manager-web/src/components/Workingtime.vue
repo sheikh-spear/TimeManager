@@ -78,7 +78,7 @@ export default {
       }
       this.mode = "weekly";
     },
-    async getUserWorkingtime(userId) {
+    async getUserWorkingtime() {
       return await new Promise(resolve =>
         Axios.get(`users/working_times`).then(response => {
           //   console.log("response", response);
@@ -88,7 +88,6 @@ export default {
               start: new Date(dateString.start),
               end: new Date(dateString.end)
             });
-            console.log(workingtimes);
           });
           resolve(workingtimes);
         })
