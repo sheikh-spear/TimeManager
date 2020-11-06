@@ -78,9 +78,9 @@ export default {
       }
       this.mode = "weekly";
     },
-    async getUserWorkingtime(userId) {
+    async getUserWorkingtime() {
       return await new Promise(resolve =>
-        Axios.get(`/api/workingtime/${userId}`).then(response => {
+        Axios.get(`users/working_times`).then(response => {
           //   console.log("response", response);
           let workingtimes = [];
           response.data.data.forEach(dateString => {

@@ -22,7 +22,7 @@
           </div>
           <div class="grid-item user-worktime-container">
               <div class="content">
-                  <!-- <user-worktime :userId="userId"></user-worktime> -->
+                  <user-worktime :userId="userId"></user-worktime>
               </div>
               <!-- <user-worktime :userId="userId"></user-worktime> -->
           </div>
@@ -33,7 +33,7 @@
 
 
 <script>
-// import UserWorktime from "../components/Workingtime";
+import UserWorktime from "../components/Workingtime";
 import Clock from "../components/Clock.vue";
 
 export default {
@@ -45,7 +45,7 @@ export default {
     };
   },
   components: {
-    // UserWorktime,
+    UserWorktime,
     Clock
   }
 };
@@ -64,6 +64,18 @@ export default {
 .grid-container {
   display: flex;
   margin: -8px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+
+  @include tablet {
+    flex-direction: column;
+  }
+
+  @include laptop-s {
+    flex-direction: row;
+  }
 }
 
 .grid-item {
@@ -82,7 +94,7 @@ export default {
 
 .user-worktime-container {
   @include tablet {
-    flex-basis: calc((100% / 3) * 2);
+    flex-basis: 100%;
   }
   @include laptop-s {
     flex-basis: 50%;
@@ -98,7 +110,7 @@ export default {
 
 .clock-container {
   @include tablet {
-    flex-basis: calc(100% / 3);
+    flex-basis: 100%;
   }
   @include laptop-s {
     flex-basis: 50%;

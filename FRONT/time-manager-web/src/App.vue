@@ -100,7 +100,12 @@ export default {
 }
 
 .dashboard {
+  overflow-y: scroll;
   @include mobile {
+    grid-column: 3 / -1;
+  }
+
+  @include tablet {
     grid-column: 2 / -1;
   }
 
