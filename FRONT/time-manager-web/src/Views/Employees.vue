@@ -11,8 +11,8 @@
                             <p class="role" v-if="employee.is_manager">manager</p>
                             <p class="role" v-if="!employee.is_manager">user</p>
                         </div>
-                        <button class="btn btn-primary">Working Time</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button v-on:click="() => addUser(employee)" class="btn btn-primary">Add</button>
+                        <button v-on:click="() => deleteUser(employee)" class="btn btn-danger">Delete</button>
                     </div>
                 </li>
             </ul>
@@ -53,6 +53,12 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    addUser: function(user) {
+      console.log(user);
+    },
+    deleteUser: function(user) {
+      console.log(user);
     }
   }
 };
