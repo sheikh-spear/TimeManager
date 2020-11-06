@@ -25,7 +25,7 @@
             <li><router-link to="/">dashboard</router-link></li>
             <li><router-link to="/profile">profile</router-link></li>
             <!-- v-if="user.is_general_manager || user.is_manager" -->
-            <li v-if="user.is_general_manager || user.is_manager" ><router-link to="/users">employees</router-link></li>
+            <li v-if="user.is_general_manager || user.is_manager" ><router-link to="/employees">employees</router-link></li>
             <li v-if="user.is_general_manager || user.is_manager" ><router-link to="/teams">teams</router-link></li>
           </ul>
           
