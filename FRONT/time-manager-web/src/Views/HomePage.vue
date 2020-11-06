@@ -17,7 +17,7 @@
       <div class="grid-container">
           <div class="grid-item clock-container">
               <div class="content">
-                  <Clock />
+                  <Clock :user="user"/>
               </div>
           </div>
           <div class="grid-item user-worktime-container">
@@ -38,6 +38,7 @@ import Clock from "../components/Clock.vue";
 
 export default {
   name: "HomePage",
+  props: ["user"],
   data() {
     return {
       userId: "b6d4-r4bf..."

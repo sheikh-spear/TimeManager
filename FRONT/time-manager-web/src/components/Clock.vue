@@ -4,8 +4,8 @@
         <p class="clock__date">{{day}}</p>
         <p class="clock__time">{{time}}</p>
         <div class="button-group">
-            <button v-on:click="startClock" class="btn btn-default" :disabled="user.status">Arrivée</button>
-            <button v-on:click="stopClock" class="btn btn-primary" :disabled="!user.status">Départ</button>
+            <button v-on:click="punchClock" class="btn btn-default" :disabled="status">Arrivée</button>
+            <button v-on:click="punchClock" class="btn btn-primary" :disabled="!status">Départ</button>
         </div>
     </div>
 </template>
@@ -17,12 +17,10 @@ import moment from "moment";
 export default {
   data() {
     return {
-      user: { status: false }
+      status: this.user.status
     };
   },
-  created() {
-    this.getUserData();
-  },
+  props: ["user"],
   computed: {
     day: function() {
       return moment()
@@ -36,24 +34,10 @@ export default {
     }
   },
   methods: {
-    getUserData: function() {
-      // console.log(this.user);
-      // axios.get("/api/users/profile").then(response => {
-      //   this.user = response.data;
-      //   // console.log(response.data);
-      //   // console.log(response.data);
-      // });
-    },
-    startClock: () => {
-      console.log("start clock");
-      axios.get("/api/users/punch_clock").then(response => {
-        console.log(response.data);
-      });
-    },
-    stopClock: () => {
-      console.log("stop clock");
-      axios.get("/api/users/punch_clock").then(response => {
-        console.log(response.data);
+    punchClock: function() {
+      console.log("punch clock");
+      axios.get("users/punch_clock").then(response => {
+        this.status = response.data.data.status;
       });
     }
   }
