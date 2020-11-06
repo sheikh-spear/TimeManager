@@ -1,8 +1,8 @@
 <template>
     <div class="clock">
         <h2 class="clock__title">Bonjour !</h2>
-        <p class="clock__date">Lundi 3 novembre</p>
-        <p class="clock__time">14:15</p>
+        <p class="clock__date">{{day}}</p>
+        <p class="clock__time">{{time}}</p>
         <div class="button-group">
             <button v-on:click="startClock" class="btn btn-default" :disabled="user.status">Arrivée</button>
             <button v-on:click="stopClock" class="btn btn-primary" :disabled="!user.status">Départ</button>
@@ -12,6 +12,8 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
+
 export default {
   data() {
     return {
@@ -21,7 +23,18 @@ export default {
   created() {
     this.getUserData();
   },
-  computed: {},
+  computed: {
+    day: function() {
+      return moment()
+        .locale("fr")
+        .format("LL");
+    },
+    time: function() {
+      return moment()
+        .locale("fr")
+        .format("LT");
+    }
+  },
   methods: {
     getUserData: function() {
       // console.log(this.user);
