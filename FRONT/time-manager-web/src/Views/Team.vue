@@ -1,34 +1,34 @@
 <template>
-    <div class="employees-container">
-        <h2 class="employees-title">Employees</h2>
-<hr>
-        <div class="employees-list">
+    <div class="team-container">
+    <div class="message" v-if="users && !users.length">
+        <h3>There is no employee in your team</h3>
+    </div>
+    <div class="users-list" v-if="users && users.length">
+            <h3 class="team-title">Users in your team:</h3>
             <ul>
-                <li v-for="employee in employees" :key="employee.email">
+                <li v-for="user in users" :key="user.email">
                     <div class="list-item">
                         <div class="user-details">
-                            <p class="email">{{employee.email}}</p>
-                            <p class="role" v-if="employee.is_manager">manager</p>
-                            <p class="role" v-if="!employee.is_manager">user</p>
+                            <p class="email">{{user.email}}</p>
+                            <p class="role" v-if="user.is_manager">manager</p>
+                            <p class="role" v-if="!user.is_manager">user</p>
                         </div>
-                        <button v-on:click="() => addUser(employee)" class="btn btn-primary">Add</button>
-                        <!-- <button v-on:click="() => deleteUser(employee)" class="btn btn-danger">Delete</button> -->
+                        <!-- <button v-on:click="() => addUser(user)" class="btn btn-primary">Add</button> -->
+                        <button v-on:click="() => deleteUser(user)" class="btn btn-danger">Delete</button>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-
+    
 </template>
 
 <script>
-const axios = require("axios");
-
+import axios from "axios";
 export default {
-  name: "Employees",
   data() {
     return {
-      employees: null
+      users: null
     };
   },
   created() {
@@ -38,7 +38,7 @@ export default {
     getUsersList: function() {
       var config = {
         method: "get",
-        url: "manager/list_users",
+        url: "manager/list_users_from_team",
         headers: {
           "X-Requested-With": "XMLHttpRequest",
           "Content-Type": "application/json"
@@ -48,37 +48,60 @@ export default {
       axios(config)
         .then(response => {
           console.log(response);
-          this.employees = response.data.data;
+          this.users = response.data.data;
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-    addUser: function(user) {
-      console.log(user);
+    deleteUser: function(user) {
+      var data = JSON.stringify({ email: user.email });
+
+      var config = {
+        method: "post",
+        url: "manager/remove_user_from_team",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "Content-Type": "application/json"
+        },
+        data
+      };
+
+      console.log(config);
+
+      axios(config)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
-    // deleteUser: function(user) {
-    //   console.log(user);
-    // }
   }
 };
 </script>
 
 <style lang="scss">
 @import "../styles/index.scss";
-.employees-container {
+
+.message {
+  text-align: center;
+}
+
+.team-container {
   overflow-y: scroll;
   height: 100vh;
   box-sizing: border-box;
   padding: 30px;
 }
 
-.employees-title {
+.team-title {
   font-size: 40px;
   text-align: center;
   margin: 20px 0;
 }
-.employees-list {
+
+.users-list {
   width: 50%;
   margin: 0 auto;
   ul {
@@ -148,5 +171,8 @@ export default {
   }
 }
 </style>
+
+
+
 
 
