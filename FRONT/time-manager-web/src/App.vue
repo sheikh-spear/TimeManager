@@ -59,14 +59,18 @@ export default {
   updated() {
     this.isLoggedIn = isLoggedIn();
   },
+  watch: {
+    isLoggedIn: function() {
+      this.loading = false;
+      this.getUserData();
+    }
+  },
   created: function() {
-    this.getUserData();
-    // => Asnyc API call here <=
-    // axios.get("users/profile").then(response => {
-    //   //get the user and store it to the local state of our App parent component
-    //   this.user = response.data;
-    //   console.log(response.data);
-    // });
+    if (isLoggedIn()) {
+      this.getUserData();
+    } else {
+      this.loading = true;
+    }
   }
 };
 </script>

@@ -55,6 +55,8 @@ export default {
 
         return users;
       }
+
+      return [];
     }
   },
   methods: {
