@@ -1,17 +1,22 @@
 <template>
     <div class="employees-container">
         <h2 class="employees-title">Employees</h2>
+        <!-- <ul>
+            <li v-for="user in users" v-bind:key="user.mail">
+                <p>{{user.mail}}</p>
+            </li>
+        </ul> -->
 <hr>
         <div class="employees-list">
             <ul>
-                <li v-for="employee in employees" :key="employee.email">
+                <li v-for="user in users" :key="user.email">
                     <div class="list-item">
                         <div class="user-details">
-                            <p class="email">{{employee.email}}</p>
-                            <p class="role" v-if="employee.is_manager">manager</p>
-                            <p class="role" v-if="!employee.is_manager">user</p>
+                            <p class="email">{{user.email}}</p>
+                            <p class="role" v-if="user.is_manager">manager</p>
+                            <p class="role" v-if="!user.is_manager">user</p>
                         </div>
-                        <button v-on:click="() => addUser(employee)" class="btn btn-primary">Add</button>
+                        <button v-on:click="() => addUser(user)" class="btn btn-primary">Add</button>
                         <!-- <button v-on:click="() => deleteUser(employee)" class="btn btn-danger">Delete</button> -->
                     </div>
                 </li>
@@ -28,11 +33,29 @@ export default {
   name: "Employees",
   data() {
     return {
-      employees: null
+      employees: null,
+      team: null
     };
   },
   created() {
     this.getUsersList();
+    this.getTeamList();
+  },
+  computed: {
+    users: function() {
+      if (this.employees && this.team) {
+        const users = this.employees.filter(employee => {
+          for (let user of this.team) {
+            // console.log(user.email);
+            if (employee.email === user.email) return false;
+          }
+
+          return true;
+        });
+
+        return users;
+      }
+    }
   },
   methods: {
     getUsersList: function() {
@@ -47,15 +70,50 @@ export default {
 
       axios(config)
         .then(response => {
-          console.log(response);
           this.employees = response.data.data;
         })
         .catch(function(error) {
           console.log(error);
         });
     },
+    getTeamList: function() {
+      var config = {
+        method: "get",
+        url: "manager/list_users_from_team",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "Content-Type": "application/json"
+        }
+      };
+
+      axios(config)
+        .then(response => {
+          this.team = response.data.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     addUser: function(user) {
-      console.log(user);
+      var data = JSON.stringify({ email: user.email });
+
+      var config = {
+        method: "post",
+        url: "manager/add_user_to_team",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "Content-Type": "application/json"
+        },
+        data
+      };
+
+      axios(config)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
     // deleteUser: function(user) {
     //   console.log(user);
