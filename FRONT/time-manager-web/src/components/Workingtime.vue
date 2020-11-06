@@ -80,7 +80,7 @@ export default {
     },
     async getUserWorkingtime(userId) {
       return await new Promise(resolve =>
-        Axios.get(`/api/workingtime/${userId}`).then(response => {
+        Axios.get(`users/working_times`).then(response => {
           //   console.log("response", response);
           let workingtimes = [];
           response.data.data.forEach(dateString => {
@@ -88,6 +88,7 @@ export default {
               start: new Date(dateString.start),
               end: new Date(dateString.end)
             });
+            console.log(workingtimes);
           });
           resolve(workingtimes);
         })
